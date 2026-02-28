@@ -1,0 +1,35 @@
+{
+  "dependencies": {
+    "axios": "^1.12.2",
+    "clsx": "^2.1.1",
+    "swr": "^2.3.6"
+  },
+  "name": "bestke-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Official repository for BEST Kosice organization website",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "nps serve .",
+    "install:all": "npm -w backend i && npm -w frontend i",
+    "dev:frontend": "npm -w frontend run dev",
+    "dev:backend": "npm -w backend run develop",
+    "dev": "npm run dev:frontend",
+    "build": "npm -w frontend run build"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kitnew/bestke-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kitnew/bestke-website/issues"
+  },
+  "homepage": "https://github.com/kitnew/bestke-website#readme"
+}
