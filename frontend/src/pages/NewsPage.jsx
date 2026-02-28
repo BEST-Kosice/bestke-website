@@ -1,42 +1,42 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Calendar, ArrowRight } from 'lucide-react'
-import { useLanguage } from '../context/LanguageContext'
-import translations, { t } from '../i18n/translations'
-import { fetchArticles, getStrapiMediaUrl } from '../services/api'
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Calendar, ArrowRight } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
+import translations, { t } from "../i18n/translations";
+import { fetchArticles, getStrapiMediaUrl } from "../services/api";
 
 const tagColors = {
-  Recruitment: 'bg-[#990032]/20 text-[#ff3366]',
-  Event: 'bg-[#FF6600]/20 text-[#FF6600]',
-  Recap: 'bg-emerald-500/20 text-emerald-400',
-  Partnership: 'bg-purple-500/20 text-purple-400',
-  Internal: 'bg-blue-500/20 text-blue-400',
-}
+  Recruitment: "bg-[#990032]/20 text-[#ff3366]",
+  Event: "bg-[#FF6600]/20 text-[#FF6600]",
+  Recap: "bg-emerald-500/20 text-emerald-400",
+  Partnership: "bg-purple-500/20 text-purple-400",
+  Internal: "bg-blue-500/20 text-blue-400",
+};
 
 export default function NewsPage() {
-  const { language } = useLanguage()
-  const [articles, setArticles] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [usingCms, setUsingCms] = useState(false)
+  const { language } = useLanguage();
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [usingCms, setUsingCms] = useState(false);
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
 
     fetchArticles()
       .then((data) => {
         if (data && data.length > 0) {
-          setArticles(data)
-          setUsingCms(true)
+          setArticles(data);
+          setUsingCms(true);
         }
-        setLoading(false)
+        setLoading(false);
       })
       .catch(() => {
         // Strapi not available — fall back to static translations
-        setLoading(false)
-      })
-  }, [])
+        setLoading(false);
+      });
+  }, []);
 
-  const staticItems = translations.newsPage.items
+  const staticItems = translations.newsPage.items;
 
   return (
     <div className="min-h-screen bg-best-neutral-dark">
@@ -44,7 +44,7 @@ export default function NewsPage() {
       <section className="py-16 md:py-20 border-b border-white/10">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-black text-white mb-6">
-            {t(translations.newsPage.heading, language)}{' '}
+            {t(translations.newsPage.heading, language)}{" "}
             <span className="gradient-text">
               {t(translations.newsPage.headingHighlight, language)}
             </span>
@@ -85,18 +85,19 @@ export default function NewsPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }
 
 /** Card for CMS-sourced articles (clickable, opens full article) */
 function CmsArticleCard({ article, language }) {
+  const localeMap = { EN: "en-US", SK: "sk-SK", UA: "uk-UA" };
   const formattedDate = new Date(article.publishDate).toLocaleDateString(
-    language === 'SK' ? 'sk-SK' : 'en-US',
-    { year: 'numeric', month: 'long' }
-  )
-  const coverUrl = getStrapiMediaUrl(article.cover)
+    localeMap[language] || "en-US",
+    { year: "numeric", month: "long" },
+  );
+  const coverUrl = getStrapiMediaUrl(article.cover);
   const tagLabel =
-    t(translations.newsPage?.tags?.[article.tag], language) || article.tag
+    t(translations.newsPage?.tags?.[article.tag], language) || article.tag;
 
   return (
     <Link to={`/news/${article.slug}`} className="block group">
@@ -121,7 +122,7 @@ function CmsArticleCard({ article, language }) {
               </div>
               <span
                 className={`px-3 py-0.5 rounded-full text-xs font-semibold ${
-                  tagColors[article.tag] || 'bg-white/10 text-gray-400'
+                  tagColors[article.tag] || "bg-white/10 text-gray-400"
                 }`}
               >
                 {tagLabel}
@@ -136,14 +137,16 @@ function CmsArticleCard({ article, language }) {
             </p>
 
             <div className="mt-4 flex items-center gap-2 text-[#FF6600] text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
-              {language === 'SK' ? 'Čítať viac' : 'Read more'}
+              {{ EN: "Read more", SK: "Čítať viac", UA: "Читати далі" }[
+                language
+              ] || "Read more"}
               <ArrowRight size={14} />
             </div>
           </div>
         </div>
       </article>
     </Link>
-  )
+  );
 }
 
 /** Card for static/fallback articles (non-clickable, same style as before) */
@@ -157,7 +160,7 @@ function StaticArticleCard({ item, language }) {
         </div>
         <span
           className={`px-3 py-0.5 rounded-full text-xs font-semibold ${
-            tagColors[item.tag] || 'bg-white/10 text-gray-400'
+            tagColors[item.tag] || "bg-white/10 text-gray-400"
           }`}
         >
           {t(translations.newsPage.tags[item.tag], language)}
@@ -170,5 +173,5 @@ function StaticArticleCard({ item, language }) {
         {t(item.summary, language)}
       </p>
     </article>
-  )
+  );
 }

@@ -32,6 +32,10 @@ body {
   font-family: 'Knewave', cursive;
 }
 
+.font-lobster {
+  font-family: 'Lobster', cursive;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

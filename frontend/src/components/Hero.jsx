@@ -1,20 +1,25 @@
-import { useEffect, useState } from 'react'
-import { ChevronDown } from 'lucide-react'
-import { useLanguage } from '../context/LanguageContext'
-import translations, { t } from '../i18n/translations'
+import { useEffect, useState } from "react";
+import { ChevronDown } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
+import translations, { t } from "../i18n/translations";
 
 export default function Hero() {
-  const images = ['/image1.webp', '/image2.webp', '/image3.webp', '/image4.webp']
-  const [currentImage, setCurrentImage] = useState(0)
-  const { language } = useLanguage()
+  const images = [
+    "/image1.webp",
+    "/image2.webp",
+    "/image3.webp",
+    "/image4.webp",
+  ];
+  const [currentImage, setCurrentImage] = useState(0);
+  const { language } = useLanguage();
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length)
-    }, 5000)
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 5000);
 
-    return () => clearInterval(interval)
-  }, [images.length])
+    return () => clearInterval(interval);
+  }, [images.length]);
 
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center border-b border-white/10 overflow-hidden">
@@ -23,7 +28,7 @@ export default function Hero() {
           <div
             key={image}
             className={`absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out ${
-              index === currentImage ? 'opacity-100' : 'opacity-0'
+              index === currentImage ? "opacity-100" : "opacity-0"
             }`}
             style={{ backgroundImage: `url(${image})` }}
           />
@@ -36,9 +41,15 @@ export default function Hero() {
           <p className="text-best-primary font-semibold text-sm md:text-base tracking-widest uppercase mb-4">
             {t(translations.hero.subtitle, language)}
           </p>
-          <h1 className="font-knewave text-5xl md:text-7xl lg:text-8xl text-white leading-tight mb-6">
-            {t(translations.hero.title1, language)}{' '}
-            <span className="gradient-text">{t(translations.hero.title2, language)}</span>
+          <h1
+            className={`${
+              language === "UA" ? "font-lobster" : "font-knewave"
+            } text-5xl md:text-7xl lg:text-8xl text-white leading-tight mb-6`}
+          >
+            {t(translations.hero.title1, language)}{" "}
+            <span className="gradient-text">
+              {t(translations.hero.title2, language)}
+            </span>
           </h1>
           <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
             {t(translations.hero.description, language)}
@@ -59,7 +70,6 @@ export default function Hero() {
             {t(translations.hero.becomePartner, language)}
           </a>
         </div>
-
       </div>
 
       {/* Scroll indicator */}
@@ -70,5 +80,5 @@ export default function Hero() {
         <ChevronDown size={32} />
       </a>
     </section>
-  )
+  );
 }
