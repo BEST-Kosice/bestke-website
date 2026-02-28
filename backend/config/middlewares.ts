@@ -1,8 +1,31 @@
-export default [
+import type { Core } from '@strapi/strapi';
+
+const config: Core.Config.Middlewares = [
   'strapi::logger',
   'strapi::errors',
-  'strapi::security',
-  'strapi::cors',
+  {
+    name: 'strapi::security',
+    config: {
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          'connect-src': ["'self'", 'https:'],
+          'img-src': ["'self'", 'data:', 'blob:', 'dl.airtable.com', 'res.cloudinary.com'],
+          'media-src': ["'self'", 'data:', 'blob:', 'dl.airtable.com', 'res.cloudinary.com'],
+          upgradeInsecureRequests: null,
+        },
+      },
+    },
+  },
+  {
+    name: 'strapi::cors',
+    config: {
+      origin: ['http://localhost:5173', 'http://localhost:4173'],
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
+      keepHeaderOnError: true,
+    },
+  },
   'strapi::poweredBy',
   'strapi::query',
   'strapi::body',
@@ -10,3 +33,5 @@ export default [
   'strapi::favicon',
   'strapi::public',
 ];
+
+export default config;
