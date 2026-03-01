@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useLanguage } from '../context/LanguageContext'
 import translations, { t } from '../i18n/translations'
 
@@ -49,12 +50,12 @@ export default function Partners() {
             <p className="text-gray-400 mb-6">
               {t(translations.partners.ctaDescription, language)}
             </p>
-            <a
-              href="mailto:kosice@best.tuke.sk"
+            <Link
+              to="/contact"
               className="bg-best-secondary hover:bg-best-secondary-light text-best-neutral-dark px-8 py-3 rounded-md font-semibold transition-colors inline-block"
             >
               {t(translations.partners.ctaButton, language)}
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,18 +1,19 @@
+import { useEffect } from "react";
 import {
+  Route,
   BrowserRouter as Router,
   Routes,
-  Route,
   useLocation,
 } from "react-router-dom";
-import { useEffect } from "react";
-import { LanguageProvider } from "./context/LanguageContext";
-import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import HomePage from "./pages/HomePage";
-import EventsPage from "./pages/EventsPage";
-import NewsPage from "./pages/NewsPage";
-import ArticlePage from "./pages/ArticlePage";
+import Navbar from "./components/Navbar";
+import { LanguageProvider } from "./context/LanguageContext";
 import AboutUsPage from "./pages/AboutUsPage";
+import ArticlePage from "./pages/ArticlePage";
+import ContactPage from "./pages/ContactPage";
+import EventsPage from "./pages/EventsPage";
+import HomePage from "./pages/HomePage";
+import NewsPage from "./pages/NewsPage";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -33,6 +34,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<AboutUsPage />} />
+              <Route path="/contact" element={<ContactPage />} />
               <Route path="/events" element={<EventsPage />} />
               <Route path="/events/:slug" element={<ArticlePage />} />
               <Route path="/news" element={<NewsPage />} />

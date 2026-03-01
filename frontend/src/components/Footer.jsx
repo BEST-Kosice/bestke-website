@@ -1,5 +1,5 @@
+import { ExternalLink, Facebook, Instagram, Linkedin, Mail, MapPin } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { Instagram, Facebook, Linkedin, Mail, MapPin, ExternalLink } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 import translations, { t } from '../i18n/translations'
 
@@ -17,6 +17,7 @@ export default function Footer() {
     { name: t(translations.nav.aboutUs, language), to: '/about' },
     { name: t(translations.footer.events, language), to: '/events' },
     { name: t(translations.footer.news, language), to: '/news' },
+    { name: t(translations.footer.contact, language), to: '/contact' },
   ]
 
   return (

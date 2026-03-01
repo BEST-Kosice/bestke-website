@@ -1,6 +1,6 @@
+import { Facebook, Instagram, Linkedin, Menu, X } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, Facebook, Instagram, Linkedin } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 import translations, { t } from '../i18n/translations'
 
@@ -16,10 +16,10 @@ export default function Navbar() {
     { name: t(translations.nav.events, language), to: '/events' },
     { name: t(translations.nav.news, language), to: '/news' },
     { name: t(translations.nav.aboutUs, language), to: '/about' },
+    { name: t(translations.nav.contacts, language), to: '/contact' },
   ]
 
   const navAnchorLinks = [
-    { name: t(translations.nav.contacts, language), href: '/#contact' },
   ]
 
   useEffect(() => {
