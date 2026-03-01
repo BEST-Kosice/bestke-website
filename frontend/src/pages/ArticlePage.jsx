@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import { Calendar, ArrowLeft, User } from "lucide-react";
 import { fetchArticleBySlug, getStrapiMediaUrl } from "../services/api";
 import { useLanguage } from "../context/LanguageContext";
@@ -16,9 +16,13 @@ const tagColors = {
 export default function ArticlePage() {
   const { slug } = useParams();
   const { language } = useLanguage();
+  const location = useLocation();
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const isEvent = location.pathname.startsWith("/events/");
+  const backPath = isEvent ? "/events" : "/news";
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -62,15 +66,21 @@ export default function ArticlePage() {
             }[language] || "Article not found."}
           </p>
           <Link
-            to="/news"
+            to={backPath}
             className="inline-flex items-center gap-2 text-[#FF6600] hover:text-[#ff3366] transition-colors"
           >
             <ArrowLeft size={18} />
-            {{
-              EN: "Back to News",
-              SK: "Späť na novinky",
-              UA: "Назад до новин",
-            }[language] || "Back to News"}
+            {isEvent
+              ? {
+                  EN: "Back to Events",
+                  SK: "Späť na podujatia",
+                  UA: "Назад до подій",
+                }[language] || "Back to Events"
+              : {
+                  EN: "Back to News",
+                  SK: "Späť na novinky",
+                  UA: "Назад до новин",
+                }[language] || "Back to News"}
           </Link>
         </div>
       </div>
@@ -89,13 +99,21 @@ export default function ArticlePage() {
       {/* Back link */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         <Link
-          to="/news"
+          to={backPath}
           className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm"
         >
           <ArrowLeft size={16} />
-          {{ EN: "Back to News", SK: "Späť na novinky", UA: "Назад до новин" }[
-            language
-          ] || "Back to News"}
+          {isEvent
+            ? {
+                EN: "Back to Events",
+                SK: "Späť na podujatia",
+                UA: "Назад до подій",
+              }[language] || "Back to Events"
+            : {
+                EN: "Back to News",
+                SK: "Späť na novinky",
+                UA: "Назад до новин",
+              }[language] || "Back to News"}
         </Link>
       </div>
 

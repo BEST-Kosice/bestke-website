@@ -1,16 +1,31 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { LanguageProvider } from './context/LanguageContext'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import HomePage from './pages/HomePage'
-import EventsPage from './pages/EventsPage'
-import NewsPage from './pages/NewsPage'
-import ArticlePage from './pages/ArticlePage'
-import AboutUsPage from './pages/AboutUsPage'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+import { useEffect } from "react";
+import { LanguageProvider } from "./context/LanguageContext";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import HomePage from "./pages/HomePage";
+import EventsPage from "./pages/EventsPage";
+import NewsPage from "./pages/NewsPage";
+import ArticlePage from "./pages/ArticlePage";
+import AboutUsPage from "./pages/AboutUsPage";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <LanguageProvider>
         <div className="bg-best-neutral-dark min-h-screen flex flex-col">
           <Navbar />
@@ -19,6 +34,7 @@ export default function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<AboutUsPage />} />
               <Route path="/events" element={<EventsPage />} />
+              <Route path="/events/:slug" element={<ArticlePage />} />
               <Route path="/news" element={<NewsPage />} />
               <Route path="/news/:slug" element={<ArticlePage />} />
             </Routes>
@@ -27,5 +43,5 @@ export default function App() {
         </div>
       </LanguageProvider>
     </Router>
-  )
+  );
 }

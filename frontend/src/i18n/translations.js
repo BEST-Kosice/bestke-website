@@ -60,10 +60,18 @@ const translations = {
       SK: "Sme lokálna skupina Rady európskych študentov technológie na Technickej univerzite v Košiciach. Od roku 1994 spájame študentov, firmy a univerzitu.",
       UA: "Ми — локальна група Ради європейських студентів технологій при Технічному університеті Кошице. З 1994 року ми об'єднуємо студентів, компанії та університет.",
     },
-    statYears: { EN: "Years of Activity", SK: "Rokov aktivity", UA: "Років діяльності" },
+    statYears: {
+      EN: "Years of Activity",
+      SK: "Rokov aktivity",
+      UA: "Років діяльності",
+    },
     statLBGs: { EN: "LBGs in Europe", SK: "LBG v Európe", UA: "LBG у Європі" },
     statCountries: { EN: "Countries", SK: "Krajín", UA: "Країн" },
-    statAlumni: { EN: "Alumni & Members", SK: "Alumni a členov", UA: "Випускників і членів" },
+    statAlumni: {
+      EN: "Alumni & Members",
+      SK: "Alumni a členov",
+      UA: "Випускників і членів",
+    },
     boardSubtitle: {
       EN: "Executive Board",
       SK: "Výkonná rada",
@@ -294,9 +302,9 @@ const translations = {
       UA: "Зроби перший крок до незабутнього студентського досвіду. Заявки відкриті для всіх студентів TUKE!",
     },
     applyEmail: {
-      EN: "Apply via Email",
-      SK: "Prihlás sa e-mailom",
-      UA: "Подай заявку електронною поштою",
+      EN: "Apply via a form",
+      SK: "Prihlás sa formou",
+      UA: "Подай заявку формою",
     },
     recruitmentNote: {
       EN: "Recruitment typically opens at the beginning of each semester. Follow our social media for updates!",
@@ -337,10 +345,33 @@ const translations = {
   eventsPage: {
     heading: { EN: "Our", SK: "Naše", UA: "Наші" },
     headingHighlight: { EN: "Events", SK: "Podujatia", UA: "Події" },
+    headingMark: {
+      EN: "Upcoming & past events",
+      SK: "Nadchádzajúce a minulé podujatia",
+      UA: "Майбутні та минулі події",
+    },
     subtitle: {
       EN: "As a student organisation, we organise numerous events focused on developing students. With every event we organise, we strive to fulfill our goal of connecting students, universities, and companies.",
       SK: "Ako študentská organizácia organizujeme množstvo podujatí zameraných na rozvoj študentov. Každým podujatím, ktoré organizujeme, sa snažíme naplniť náš cieľ – spájať študentov, univerzity a firmy.",
       UA: "Як студентська організація, ми проводимо численні заходи, спрямовані на розвиток студентів. Кожним заходом, який ми організовуємо, ми прагнемо досягти нашої мети — об'єднувати студентів, університети та компанії.",
+    },
+    readMore: { EN: "Read more", SK: "Čítať viac", UA: "Читати далі" },
+    tags: {
+      Recruitment: { EN: "Recruitment", SK: "Nábor", UA: "Набір" },
+      Event: { EN: "Event", SK: "Podujatie", UA: "Подія" },
+      Recap: { EN: "Recap", SK: "Zhrnutie", UA: "Підсумки" },
+      Partnership: { EN: "Partnership", SK: "Partnerstvo", UA: "Партнерство" },
+      Internal: { EN: "Internal", SK: "Interné", UA: "Внутрішнє" },
+    },
+    emptyTitle: {
+      EN: "No events yet",
+      SK: "Zatiaľ žiadne podujatia",
+      UA: "Подій поки немає",
+    },
+    emptyDescription: {
+      EN: "We're preparing something exciting — check back soon for upcoming events!",
+      SK: "Pripravujeme niečo výnimočné — vráťte sa čoskoro pre nadchádzajúce podujatia!",
+      UA: "Ми готуємо щось захопливе — повертайтеся незабаром, щоб дізнатися про майбутні події!",
     },
     items: [
       {
@@ -434,6 +465,16 @@ const translations = {
     },
     featuredItem: { EN: "Featured", SK: "Odporúčané", UA: "Рекомендоване" },
     itemReadMore: { EN: "Read more", SK: "Čítať viac", UA: "Читати далі" },
+    emptyTitle: {
+      EN: "No news yet",
+      SK: "Zatiaľ žiadne novinky",
+      UA: "Новин поки немає",
+    },
+    emptyDescription: {
+      EN: "Stay tuned — we'll share the latest updates from BEST Košice here soon!",
+      SK: "Zostaňte naladení — najnovšie správy z BEST Košice tu čoskoro pridáme!",
+      UA: "Залишайтеся з нами — незабаром тут з'являться останні новини від BEST Košice!",
+    },
     items: [
       {
         date: { EN: "February 2026", SK: "Február 2026", UA: "Лютий 2026" },

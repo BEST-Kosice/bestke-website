@@ -19,6 +19,44 @@ export async function fetchArticles() {
 }
 
 /**
+ * Fetch only News articles (or legacy articles with no articleType set).
+ */
+export async function fetchNews() {
+  const params = new URLSearchParams({
+    "filters[$or][0][articleType][$eq]": "News",
+    "filters[$or][1][articleType][$null]": "true",
+    "sort[0]": "pinned:desc",
+    "sort[1]": "publishDate:desc",
+    populate: "*",
+    "pagination[pageSize]": "50",
+  });
+
+  const res = await fetch(`${STRAPI_URL}/api/articles?${params}`);
+  if (!res.ok) throw new Error(`Failed to fetch news: ${res.status}`);
+
+  const json = await res.json();
+  return json.data;
+}
+
+/**
+ * Fetch only Event articles from Strapi.
+ */
+export async function fetchEvents() {
+  const params = new URLSearchParams({
+    "filters[articleType][$eq]": "Event",
+    "sort[0]": "publishDate:desc",
+    populate: "*",
+    "pagination[pageSize]": "50",
+  });
+
+  const res = await fetch(`${STRAPI_URL}/api/articles?${params}`);
+  if (!res.ok) throw new Error(`Failed to fetch events: ${res.status}`);
+
+  const json = await res.json();
+  return json.data;
+}
+
+/**
  * Fetch a single article by its slug.
  */
 export async function fetchArticleBySlug(slug) {

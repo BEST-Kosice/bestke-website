@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import translations, { t } from "../i18n/translations";
-import { fetchArticles, getStrapiMediaUrl } from "../services/api";
+import { fetchNews, getStrapiMediaUrl } from "../services/api";
 
 const tagConfig = {
   Recruitment: {
@@ -54,16 +54,14 @@ export default function NewsPage() {
   const { language } = useLanguage();
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [usingCms, setUsingCms] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    fetchArticles()
+    fetchNews()
       .then((data) => {
         if (data && data.length > 0) {
           setArticles(data);
-          setUsingCms(true);
         }
         setLoading(false);
       })
@@ -72,29 +70,22 @@ export default function NewsPage() {
       });
   }, []);
 
-  const staticItems = translations.newsPage.items;
-  const items = usingCms ? articles : null;
-  const allItems = items || staticItems;
-
-  // For CMS: pinned article goes to featured slot; rest sorted by date
-  let featured, rest;
-  if (usingCms) {
-    const pinnedIdx = allItems.findIndex((a) => a.pinned);
+  // Pinned article goes to featured slot; rest sorted by date
+  let featured = null;
+  let rest = [];
+  if (articles.length > 0) {
+    const pinnedIdx = articles.findIndex((a) => a.pinned);
     if (pinnedIdx >= 0) {
-      featured = allItems[pinnedIdx];
+      featured = articles[pinnedIdx];
       rest = [
-        ...allItems.slice(0, pinnedIdx),
-        ...allItems.slice(pinnedIdx + 1),
+        ...articles.slice(0, pinnedIdx),
+        ...articles.slice(pinnedIdx + 1),
       ];
     } else {
-      featured = allItems[0];
-      rest = allItems.slice(1);
+      featured = articles[0];
+      rest = articles.slice(1);
     }
-    // Sort remaining articles by publishDate descending
     rest.sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
-  } else {
-    featured = allItems[0];
-    rest = allItems.slice(1);
   }
 
   return (
@@ -113,9 +104,11 @@ export default function NewsPage() {
               {t(translations.newsPage.headingHighlight, language)}
             </span>
           </h1>
-          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-            {t(translations.newsPage.subtitle, language)}
-          </p>
+          {articles.length !== 0 && (
+            <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+              {t(translations.newsPage.subtitle, language)}
+            </p>
+          )}
         </div>
       </section>
 
@@ -123,59 +116,63 @@ export default function NewsPage() {
         <div className="flex justify-center py-20">
           <div className="w-10 h-10 border-2 border-[#990032] border-t-transparent rounded-full animate-spin" />
         </div>
+      ) : articles.length === 0 ? (
+        /* ─── Empty state ─── */
+        <section className="pb-24 md:pb-32">
+          <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
+            <div className="w-20 h-20 rounded-full bg-[#990032]/10 border border-[#990032]/20 flex items-center justify-center mx-auto mb-6">
+              <Newspaper size={32} className="text-[#990032]/60" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              {t(translations.newsPage.emptyTitle, language)}
+            </h2>
+            <p className="text-gray-400 text-lg leading-relaxed max-w-lg mx-auto">
+              {t(translations.newsPage.emptyDescription, language)}
+            </p>
+          </div>
+        </section>
       ) : (
         <>
           {/* Featured Article */}
           {featured && (
             <section className="pb-16 md:pb-20">
               <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                {usingCms ? (
-                  <CmsFeaturedCard article={featured} language={language} />
-                ) : (
-                  <StaticFeaturedCard item={featured} language={language} />
-                )}
+                <CmsFeaturedCard article={featured} language={language} />
               </div>
             </section>
           )}
 
           {/* Alternating Articles */}
-          <section className="pb-24 md:pb-32">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-              {/* Section divider */}
-              <div className="flex items-center gap-4 mb-14">
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-                <span className="text-xs uppercase tracking-[0.3em] text-gray-500 font-semibold whitespace-nowrap">
-                  {t(translations.newsPage.other, language)}
-                </span>
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-              </div>
+          {rest.length > 0 && (
+            <section className="pb-24 md:pb-32">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Section divider */}
+                <div className="flex items-center gap-4 mb-14">
+                  <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                  <span className="text-xs uppercase tracking-[0.3em] text-gray-500 font-semibold whitespace-nowrap">
+                    {t(translations.newsPage.other, language)}
+                  </span>
+                  <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                </div>
 
-              <div className="relative">
-                {/* Vertical timeline line (desktop only) */}
-                <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[#990032]/40 via-[#FF6600]/20 to-transparent" />
+                <div className="relative">
+                  {/* Vertical timeline line (desktop only) */}
+                  <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[#990032]/40 via-[#FF6600]/20 to-transparent" />
 
-                <div className="space-y-16 lg:space-y-24">
-                  {rest.map((item, index) =>
-                    usingCms ? (
+                  <div className="space-y-16 lg:space-y-24">
+                    {rest.map((item, index) => (
                       <CmsAlternatingCard
                         key={item.id}
                         article={item}
                         language={language}
                         index={index}
                       />
-                    ) : (
-                      <StaticAlternatingCard
-                        key={index}
-                        item={item}
-                        language={language}
-                        index={index}
-                      />
-                    ),
-                  )}
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+          )}
         </>
       )}
     </div>
@@ -325,75 +322,6 @@ function CmsFeaturedCard({ article, language }) {
   );
 }
 
-function StaticFeaturedCard({ item, language }) {
-  const accent = tagAccentColors[item.tag] || "#990032";
-  const Icon = tagConfig[item.tag]?.icon || Newspaper;
-
-  return (
-    <article className="relative rounded-2xl overflow-hidden border border-white/[0.06] bg-gradient-to-br from-[#1a0a12] to-[#0d0509]">
-      <div className="absolute top-4 left-4 z-20">
-        <span
-          className="px-3 py-1 rounded-full text-white text-xs font-bold uppercase tracking-wider"
-          style={{ backgroundColor: accent }}
-        >
-          {t(translations.newsPage.featuredItem, language)}
-        </span>
-      </div>
-
-      <div className="grid md:grid-cols-2 gap-0">
-        {/* Decorative cover placeholder */}
-        <div
-          className="relative h-64 md:h-[420px] overflow-hidden flex items-center justify-center"
-          style={{
-            background: `linear-gradient(135deg, ${accent}20 0%, #1a0a12 50%, ${accent}10 100%)`,
-          }}
-        >
-          <div className="text-center">
-            <div
-              className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 border"
-              style={{
-                backgroundColor: `${accent}20`,
-                borderColor: `${accent}40`,
-              }}
-            >
-              <Icon size={36} style={{ color: accent }} />
-            </div>
-            <p className="text-gray-600 text-sm uppercase tracking-widest">
-              BEST Košice
-            </p>
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0d0509] via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-[#0d0509]/90 pointer-events-none" />
-        </div>
-
-        {/* Content */}
-        <div className="relative p-8 md:p-12 flex flex-col justify-center">
-          <div
-            className="absolute top-0 left-0 w-1 h-full hidden md:block"
-            style={{
-              background: `linear-gradient(to bottom, ${accent}, ${accent}44)`,
-            }}
-          />
-
-          <div className="flex flex-wrap items-center gap-3 mb-5">
-            <div className="flex items-center gap-2 text-gray-500 text-sm">
-              <Calendar size={14} />
-              {t(item.date, language)}
-            </div>
-            <TagBadge tag={item.tag} language={language} />
-          </div>
-
-          <h2 className="text-white font-black text-2xl md:text-3xl lg:text-4xl mb-4 leading-tight">
-            {t(item.title, language)}
-          </h2>
-          <p className="text-gray-400 leading-relaxed text-base md:text-lg">
-            {t(item.summary, language)}
-          </p>
-        </div>
-      </div>
-    </article>
-  );
-}
-
 /* ─── ALTERNATING CARDS ─── */
 
 function CmsAlternatingCard({ article, language, index }) {
@@ -490,87 +418,6 @@ function CmsAlternatingCard({ article, language, index }) {
           </div>
         </div>
       </Link>
-    </div>
-  );
-}
-
-function StaticAlternatingCard({ item, language, index }) {
-  const isLeft = index % 2 === 0;
-  const accent = tagAccentColors[item.tag] || "#990032";
-
-  return (
-    <div className="relative">
-      <TimelineDot tag={item.tag} />
-
-      <div
-        className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center"
-        style={!isLeft ? { direction: "rtl" } : {}}
-      >
-        {/* Visual side */}
-        <div
-          className={`${isLeft ? "lg:pr-12" : "lg:pl-12"}`}
-          style={!isLeft ? { direction: "ltr" } : {}}
-        >
-          <div
-            className="relative rounded-xl overflow-hidden border border-white/[0.06] h-56 md:h-72 flex items-center justify-center"
-            style={{
-              background: `linear-gradient(135deg, ${accent}15 0%, #1a0a12 50%, ${accent}08 100%)`,
-            }}
-          >
-            <div className="text-center">
-              <div
-                className="w-20 h-20 rounded-full mx-auto mb-3 flex items-center justify-center border"
-                style={{
-                  backgroundColor: `${accent}15`,
-                  borderColor: `${accent}30`,
-                }}
-              >
-                {(() => {
-                  const Icon = tagConfig[item.tag]?.icon || Sparkles;
-                  return <Icon size={30} style={{ color: accent }} />;
-                })()}
-              </div>
-              <p className="text-gray-600 text-xs uppercase tracking-[0.2em]">
-                BEST Košice
-              </p>
-            </div>
-
-            {/* Number overlay */}
-            <div className="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-black/60 backdrop-blur-sm border border-white/10 flex items-center justify-center">
-              <span className="text-sm font-bold" style={{ color: accent }}>
-                {String(index + 2).padStart(2, "0")}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Content side */}
-        <div
-          className={`${isLeft ? "lg:pl-12" : "lg:pr-12"}`}
-          style={!isLeft ? { direction: "ltr" } : {}}
-        >
-          <div className="flex flex-wrap items-center gap-3 mb-4">
-            <div className="flex items-center gap-2 text-gray-500 text-sm">
-              <Calendar size={14} />
-              {t(item.date, language)}
-            </div>
-            <TagBadge tag={item.tag} language={language} />
-          </div>
-
-          <h2 className="text-white font-bold text-xl md:text-2xl lg:text-3xl mb-4 leading-tight">
-            {t(item.title, language)}
-          </h2>
-          <p className="text-gray-400 leading-relaxed mb-5">
-            {t(item.summary, language)}
-          </p>
-
-          {/* Accent bar */}
-          <div
-            className="h-0.5 w-16 rounded-full opacity-40"
-            style={{ backgroundColor: accent }}
-          />
-        </div>
-      </div>
     </div>
   );
 }

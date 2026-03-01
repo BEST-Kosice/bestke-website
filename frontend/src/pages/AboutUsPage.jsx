@@ -156,8 +156,9 @@ function PersonCard({ member, language, highlight = false }) {
       className={`group relative glass rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-best-primary/10 ${
         highlight ? 'ring-2 ring-best-primary/40' : ''
       }`}
-      href={member.role.EN==="IT Responsible" ? "https://www.youtube.com/watch?v=dQw4w9WgXcQ" : "#"}
-    >
+      {...(member.role.EN === "IT Responsible" && {
+        href: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      })}    >
       <div className="aspect-[3/4] overflow-hidden bg-best-neutral-dark">
         <img
           src={member.photo}

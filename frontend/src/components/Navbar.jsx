@@ -61,7 +61,15 @@ export default function Navbar() {
           }`}
         >
           {/* Logo — links home */}
-          <Link to="/" className="flex items-center gap-3 shrink-0 group">
+          <Link
+            to="/"
+            className="flex items-center gap-3 shrink-0 group"
+            onClick={() => {
+              if (location.pathname === '/') {
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+              }
+            }}
+          >
             <img
               src="/BESTKEWhite.png"
               alt="BEST Košice"

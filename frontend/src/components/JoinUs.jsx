@@ -58,8 +58,9 @@ export default function JoinUs() {
 
                 <div className="space-y-4">
                   <a
-                    href="mailto:kosice@best.tuke.sk"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSfixUdCrF1uEBZ_AKJicMgeuFStXbv0HD2Hwh5WA3qBAZtbAA/viewform?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnnmEYfD1a45KyiF3Ut6WcLjKZv-dCB-yGHlnWC4A-J0X6qnXck0thimfIopU_aem_vmfnaS2-fQkjYQ-nKulcbw"
                     className="flex items-center justify-center gap-2 w-full bg-best-primary hover:bg-best-primary-light text-white py-3.5 rounded-md font-semibold transition-colors"
+                    target="_blank"
                   >
                     <Mail size={18} />
                     {t(translations.joinUs.applyEmail, language)}
