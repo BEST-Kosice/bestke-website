@@ -15,10 +15,10 @@ export default function Navbar() {
   const navRouteLinks = [
     { name: t(translations.nav.events, language), to: '/events' },
     { name: t(translations.nav.news, language), to: '/news' },
+    { name: t(translations.nav.aboutUs, language), to: '/about' },
   ]
 
   const navAnchorLinks = [
-    { name: t(translations.nav.aboutUs, language), href: '/#about' },
     { name: t(translations.nav.contacts, language), href: '/#contact' },
   ]
 

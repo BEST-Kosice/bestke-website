@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage'
 import EventsPage from './pages/EventsPage'
 import NewsPage from './pages/NewsPage'
 import ArticlePage from './pages/ArticlePage'
+import AboutUsPage from './pages/AboutUsPage'
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
           <main className="flex-1 pt-16 md:pt-20 lg:pt-24">
             <Routes>
               <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutUsPage />} />
               <Route path="/events" element={<EventsPage />} />
               <Route path="/news" element={<NewsPage />} />
               <Route path="/news/:slug" element={<ArticlePage />} />

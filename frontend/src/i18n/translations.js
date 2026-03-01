@@ -51,6 +51,55 @@ const translations = {
     countries: { EN: "Countries", SK: "Krajín", UA: "Країн" },
   },
 
+  // ── About Us Page ──
+  aboutUsPage: {
+    heroTitle: { EN: "About", SK: "O", UA: "Про" },
+    heroHighlight: { EN: "BEST Košice", SK: "BEST Košice", UA: "BEST Košice" },
+    heroSubtitle: {
+      EN: "We are a local group of the Board of European Students of Technology at the Technical University of Košice. Since 1994, we connect students, companies, and the university.",
+      SK: "Sme lokálna skupina Rady európskych študentov technológie na Technickej univerzite v Košiciach. Od roku 1994 spájame študentov, firmy a univerzitu.",
+      UA: "Ми — локальна група Ради європейських студентів технологій при Технічному університеті Кошице. З 1994 року ми об'єднуємо студентів, компанії та університет.",
+    },
+    statYears: { EN: "Years of Activity", SK: "Rokov aktivity", UA: "Років діяльності" },
+    statLBGs: { EN: "LBGs in Europe", SK: "LBG v Európe", UA: "LBG у Європі" },
+    statCountries: { EN: "Countries", SK: "Krajín", UA: "Країн" },
+    statAlumni: { EN: "Alumni & Members", SK: "Alumni a členov", UA: "Випускників і членів" },
+    boardSubtitle: {
+      EN: "Executive Board",
+      SK: "Výkonná rada",
+      UA: "Виконавча рада",
+    },
+    boardHeading: { EN: "Our", SK: "Naša", UA: "Наша" },
+    boardHighlight: { EN: "Board", SK: "Rada", UA: "Рада" },
+    boardDescription: {
+      EN: "The Executive Board is the management body of our organization — elected for a one-year term, making key strategic decisions and representing BEST Košice.",
+      SK: "Výkonná rada je riadiacim orgánom našej organizácie — volená na jeden rok, prijíma kľúčové strategické rozhodnutia a zastupuje BEST Košice.",
+      UA: "Виконавча рада — це управлінський орган нашої організації, обраний на один рік, що приймає ключові стратегічні рішення та представляє BEST Košice.",
+    },
+    nonBoardHeading: {
+      EN: "Non-Board Positions",
+      SK: "Mimopredstavenstvo",
+      UA: "Позаправлінські позиції",
+    },
+    deptHeading: { EN: "Our", SK: "Naše", UA: "Наші" },
+    deptHighlight: { EN: "Departments", SK: "Oddelenia", UA: "Відділи" },
+    deptDescription: {
+      EN: "To help people develop, gain new skills, and grow, we have departments — each allowing members to specialize and develop in their own field.",
+      SK: "Aby sme pomáhali ľuďom rozvíjať sa, získavať nové zručnosti a rásť, máme oddelenia — každé umožňuje členom špecializovať sa a rozvíjať sa v svojom odbore.",
+      UA: "Щоб допомогти людям розвиватися, здобувати нові навички та зростати, ми маємо відділи — кожен дозволяє членам спеціалізуватися та розвиватися у своїй сфері.",
+    },
+    contactHeading: {
+      EN: "Get in Touch",
+      SK: "Kontaktujte nás",
+      UA: "Зв'яжіться з нами",
+    },
+    contactDescription: {
+      EN: "Have a question or want to collaborate? Reach out to us!",
+      SK: "Máte otázku alebo chcete spolupracovať? Ozvite sa nám!",
+      UA: "Маєте питання або хочете співпрацювати? Зв'яжіться з нами!",
+    },
+  },
+
   // ── Events (homepage) ──
   events: {
     heading1: { EN: "What do we", SK: "Čo", UA: "Що ми" },

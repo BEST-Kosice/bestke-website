@@ -14,6 +14,7 @@ export default function Footer() {
 
   const footerLinks = [
     { name: t(translations.footer.home, language), to: '/' },
+    { name: t(translations.nav.aboutUs, language), to: '/about' },
     { name: t(translations.footer.events, language), to: '/events' },
     { name: t(translations.footer.news, language), to: '/news' },
   ]
