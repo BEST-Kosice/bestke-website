@@ -56,6 +56,11 @@
       "relation": "manyToOne",
       "target": "api::category.category",
       "inversedBy": "articles"
+    },
+    "pinned": {
+      "type": "boolean",
+      "default": false,
+      "required": false
     }
   }
 }
