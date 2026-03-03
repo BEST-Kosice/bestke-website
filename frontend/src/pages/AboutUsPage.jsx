@@ -238,7 +238,7 @@ export default function AboutUsPage() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 flex items-center justify-center gap-4 flex-wrap">
-            {t(tr.heroTitle, language)}{' '}
+            {/* {t(tr.heroTitle, language)}{' '} */}
             <img src="/BESTKEWhite.png" alt="BEST Košice" className="h-14 md:h-20 lg:h-24 w-auto" />
           </h1>
           <p className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
