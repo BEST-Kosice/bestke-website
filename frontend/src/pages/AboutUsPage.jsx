@@ -17,19 +17,19 @@ const boardMembers = [
     name: 'Roderik Basanda',
     role: { EN: 'President', SK: 'Prezident', UA: 'Президент' },
     email: 'roderik.basanda@best-eu.org',
-    photo: 'https://best.tuke.sk/img/people/board/roderik.webp',
+    photo: '/public/board/roderik.webp',
   },
   {
     name: 'Katarína Gondová',
     role: { EN: 'Secretary', SK: 'Tajomníčka', UA: 'Секретар' },
     email: 'katarina.gondova@best-eu.org',
-    photo: 'https://best.tuke.sk/img/people/board/gadga.webp',
+    photo: '/public/board/gadga.webp',
   },
   {
     name: 'Peter Leško',
     role: { EN: 'Treasurer', SK: 'Pokladník', UA: 'Скарбник' },
     email: 'peter.lesko@best-eu.org',
-    photo: 'https://best.tuke.sk/img/people/board/peto.webp',
+    photo: '/public/board/peto.webp',
   },
   {
     name: 'Jozef Belušak',
@@ -39,7 +39,7 @@ const boardMembers = [
       UA: 'VP з фандрейзингу',
     },
     email: 'jozef.belusak@best-eu.org',
-    photo: 'https://best.tuke.sk/img/people/board/jozo.webp',
+    photo: '/public/board/jozo.webp',
   },
   {
     name: 'Denis Le Thanh',
@@ -49,7 +49,7 @@ const boardMembers = [
       UA: 'VP з людських ресурсів',
     },
     email: 'denis.le.thanh@best-eu.org',
-    photo: 'https://best.tuke.sk/img/people/board/delety.webp',
+    photo: '/public/board/delety.webp',
   },
   {
     name: 'Jakub Paranič',
@@ -59,7 +59,7 @@ const boardMembers = [
       UA: 'VP зі зв\'язків з громадськістю',
     },
     email: 'jakub.paranic@best-eu.org',
-    photo: 'https://best.tuke.sk/img/people/board/kubo.webp',
+    photo: '/public/board/kubo.webp',
   },
   {
     name: 'Lubomír Krajčík',
@@ -69,7 +69,7 @@ const boardMembers = [
       UA: 'Відповідальний за дизайн',
     },
     email: 'lubomir.krajcik@best-eu.org',
-    photo: 'https://best.tuke.sk/img/people/board/lubo.webp',
+    photo: '/public/board/lubo.webp',
   },
   {
     name: 'Nikita Chernysh',
@@ -79,7 +79,7 @@ const boardMembers = [
       UA: 'Відповідальний за IT',
     },
     email: 'nikita.chernysh@best-eu.org',
-    photo: 'https://best.tuke.sk/img/people/board/nikita.webp',
+    photo: '/public/board/nikita.webp',
   },
 ]
 
