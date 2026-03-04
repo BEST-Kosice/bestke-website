@@ -249,7 +249,7 @@ export default function AboutUsPage() {
           <div className="flex flex-wrap justify-center gap-8 mt-12">
             {[
               { value: '30+', label: t(tr.statYears, language) },
-              { value: '96', label: t(tr.statLBGs, language) },
+              { value: '81', label: t(tr.statLBGs, language) },
               { value: '33', label: t(tr.statCountries, language) },
               { value: '500+', label: t(tr.statAlumni, language) },
             ].map((s) => (

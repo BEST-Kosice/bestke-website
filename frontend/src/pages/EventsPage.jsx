@@ -12,6 +12,10 @@ import {
   CalendarDays,
   BookOpen,
   Megaphone,
+  Pin,
+  CheckCircle2,
+  GraduationCap,
+  ExternalLink,
 } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import translations, { t } from "../i18n/translations";
@@ -69,6 +73,21 @@ export default function EventsPage() {
       });
   }, []);
 
+  /* ─── Split into upcoming (not completed) and past (completed) ─── */
+  const upcomingEvents = articles.filter((a) => !a.completed);
+  const pastEvents = articles.filter((a) => a.completed);
+
+  /* ─── Sort: pinned first, then by publishDate desc ─── */
+  const sortEvents = (events) =>
+    [...events].sort((a, b) => {
+      if (a.pinned && !b.pinned) return -1;
+      if (!a.pinned && b.pinned) return 1;
+      return new Date(b.publishDate) - new Date(a.publishDate);
+    });
+
+  const sortedUpcoming = sortEvents(upcomingEvents);
+  const sortedPast = sortEvents(pastEvents);
+
   return (
     <div className="min-h-screen bg-best-neutral-dark">
       {/* Header */}
@@ -111,27 +130,135 @@ export default function EventsPage() {
           </div>
         </section>
       ) : (
-        /* ─── CMS Events (alternating cards, no featured) ─── */
-        <section className="pb-24 md:pb-32">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="relative">
-              {/* Vertical timeline line (desktop only) */}
-              <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[#FF6600]/40 via-[#990032]/20 to-transparent" />
-
-              <div className="space-y-16 lg:space-y-24">
-                {articles.map((article, index) => (
-                  <CmsAlternatingCard
-                    key={article.id}
-                    article={article}
-                    language={language}
-                    index={index}
-                  />
-                ))}
+        <>
+          {/* ─── BEST Courses Info Section ─── */}
+          <section className="pb-12 md:pb-16">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="relative rounded-2xl overflow-hidden border border-[#FF6600]/15 bg-gradient-to-br from-[#FF6600]/5 via-[#1a0f08] to-[#0d0509] p-8 md:p-10">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF6600]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                <div className="relative flex flex-col md:flex-row items-start md:items-center gap-6">
+                  <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-[#FF6600]/10 border border-[#FF6600]/20 flex items-center justify-center">
+                    <GraduationCap size={28} className="text-[#FF6600]" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-white font-bold text-xl md:text-2xl mb-2">
+                      {t(translations.eventsPage.coursesTitle, language)}
+                    </h3>
+                    <p className="text-gray-400 leading-relaxed">
+                      {t(translations.eventsPage.coursesDescription, language)}
+                    </p>
+                  </div>
+                  <a
+                    href="https://best.eu.org/courses/list.jsp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#FF6600] hover:bg-[#FF6600]/90 text-white font-semibold text-sm transition-colors duration-200"
+                  >
+                    {t(translations.eventsPage.coursesLink, language)}
+                    <ExternalLink size={14} />
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+          {/* ─── Upcoming Events Section ─── */}
+          <section className="pb-16 md:pb-20">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <SectionHeading
+                heading={t(translations.eventsPage.upcomingHeading, language)}
+                highlight={t(
+                  translations.eventsPage.upcomingHighlight,
+                  language,
+                )}
+                accentColor="#FF6600"
+              />
+
+              {sortedUpcoming.length === 0 ? (
+                <div className="text-center py-16">
+                  <div className="w-16 h-16 rounded-full bg-[#FF6600]/10 border border-[#FF6600]/20 flex items-center justify-center mx-auto mb-4">
+                    <CalendarDays
+                      size={28}
+                      className="text-[#FF6600]/60"
+                    />
+                  </div>
+                  <p className="text-gray-400 text-lg">
+                    {t(translations.eventsPage.noUpcoming, language)}
+                  </p>
+                  <p className="text-gray-500 text-sm mt-2">
+                    {t(
+                      translations.eventsPage.noUpcomingDescription,
+                      language,
+                    )}
+                  </p>
+                </div>
+              ) : (
+                <div className="relative">
+                  <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[#FF6600]/40 via-[#990032]/20 to-transparent" />
+                  <div className="space-y-16 lg:space-y-24">
+                    {sortedUpcoming.map((article, index) => (
+                      <CmsAlternatingCard
+                        key={article.id}
+                        article={article}
+                        language={language}
+                        index={index}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* ─── Past Events Section ─── */}
+          {sortedPast.length > 0 && (
+            <section className="pb-24 md:pb-32 border-t border-white/[0.06] pt-16 md:pt-20">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <SectionHeading
+                  heading={t(translations.eventsPage.pastHeading, language)}
+                  highlight={t(
+                    translations.eventsPage.pastHighlight,
+                    language,
+                  )}
+                  accentColor="#990032"
+                />
+
+                <div className="relative">
+                  <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[#990032]/40 via-[#990032]/10 to-transparent" />
+                  <div className="space-y-16 lg:space-y-24">
+                    {sortedPast.map((article, index) => (
+                      <CmsAlternatingCard
+                        key={article.id}
+                        article={article}
+                        language={language}
+                        index={index}
+                        isPast
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+        </>
       )}
+    </div>
+  );
+}
+
+/* ─── Section heading ─── */
+function SectionHeading({ heading, highlight, accentColor }) {
+  return (
+    <div className="text-center mb-12">
+      <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+        {heading}{" "}
+        <span style={{ color: accentColor }}>{highlight}</span>
+      </h2>
+      <div
+        className="w-24 h-1 mx-auto rounded-full mb-6"
+        style={{
+          background: `linear-gradient(to right, ${accentColor}, ${accentColor}88)`,
+        }}
+      />
     </div>
   );
 }
@@ -177,7 +304,7 @@ function TimelineDot({ tag }) {
 }
 
 /* ─── Alternating CMS Card ─── */
-function CmsAlternatingCard({ article, language, index }) {
+function CmsAlternatingCard({ article, language, index, isPast }) {
   const localeMap = { EN: "en-US", SK: "sk-SK", UA: "uk-UA" };
   const formattedDate = new Date(article.publishDate).toLocaleDateString(
     localeMap[language] || "en-US",
@@ -201,12 +328,12 @@ function CmsAlternatingCard({ article, language, index }) {
             className={`${isLeft ? "lg:pr-12" : "lg:pl-12"}`}
             style={!isLeft ? { direction: "ltr" } : {}}
           >
-            <div className="relative rounded-xl overflow-hidden border border-white/[0.06] group-hover:border-white/10 transition-colors duration-300">
+            <div className={`relative rounded-xl overflow-hidden border border-white/[0.06] group-hover:border-white/10 transition-colors duration-300 ${isPast ? "opacity-75" : ""}`}>
               {coverUrl ? (
                 <img
                   src={coverUrl}
                   alt={article.title}
-                  className="w-full h-56 md:h-72 object-cover group-hover:scale-105 transition-transform duration-700"
+                  className={`w-full h-56 md:h-72 object-cover group-hover:scale-105 transition-transform duration-700 ${isPast ? "grayscale-[30%]" : ""}`}
                 />
               ) : (
                 <div
@@ -233,6 +360,13 @@ function CmsAlternatingCard({ article, language, index }) {
                   {String(index + 1).padStart(2, "0")}
                 </span>
               </div>
+              {/* Pinned badge */}
+              {article.pinned && (
+                <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FF6600]/90 text-white text-xs font-semibold backdrop-blur-sm">
+                  <Pin size={12} />
+                  Pinned
+                </div>
+              )}
             </div>
           </div>
 
@@ -247,6 +381,12 @@ function CmsAlternatingCard({ article, language, index }) {
                 {formattedDate}
               </div>
               <TagBadge tag={article.tag} language={language} />
+              {isPast && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-gray-500/20 text-gray-400 border border-gray-500/30">
+                  <CheckCircle2 size={12} />
+                  Completed
+                </span>
+              )}
             </div>
 
             <h2 className="text-white font-bold text-xl md:text-2xl lg:text-3xl mb-4 leading-tight group-hover:text-[#FF6600] transition-colors duration-300">

@@ -18,9 +18,9 @@ const translations = {
         title1: { EN: "We Develop", SK: "Rozvíjame", UA: "Ми розвиваємо" },
         title2: { EN: "Students", SK: "Študentov", UA: "Студентів" },
         description: {
-            EN: "BEST Košice — connecting students, companies, and the university at the Technical University of Košice since 1989.",
-            SK: "BEST Košice — spájame študentov, firmy a univerzitu na Technickej univerzite v Košiciach od roku 1989.",
-            UA: "BEST Košice — об'єднуємо студентів, компанії та університет у Технічному університеті Кошице з 1989 року.",
+            EN: "BEST Košice — connecting students, companies, and the university at the Technical University of Košice since 1994.",
+            SK: "BEST Košice — spájame študentov, firmy a univerzitu na Technickej univerzite v Košiciach od roku 1994.",
+            UA: "BEST Košice — об'єднуємо студентів, компанії та університет у Технічному університеті Кошице з 1994 року.",
         },
         joinUs: { EN: "Join Us", SK: "Pridaj sa", UA: "Приєднуйся" },
         becomePartner: {
@@ -129,14 +129,14 @@ const translations = {
         items: [
             {
                 title: {
-                    EN: "BEST COURSES",
+                    EN: "BEST COURSES", 
                     SK: "BEST KURZY",
                     UA: "КУРСИ BEST",
                 },
                 description: {
-                    EN: "10-14 day long event for 20-25 TUKE students and students from technical universities from all 85 Local BEST Groups from all over Europe. It consists of an academic part led by TUKE lecturers or partner company representatives focused on a specific topic (such as programming in Java language, 3D printing, Internet of Things…) where participants learn and present their results at the end of the course. During the non-academic part of a BEST Course, we show participants Kosice and Slovak culture, monuments, historical places, and traditions.",
-                    SK: "10-14 dňové podujatie pre 20-25 študentov TUKE a študentov technických univerzít zo všetkých 85 lokálnych BEST skupín z celej Európy. Skladá sa z akademickej časti vedenej prednášajúcimi TUKE alebo zástupcami partnerských firiem zameranej na konkrétnu tému (programovanie v jazyku Java, 3D tlač, Internet vecí…), kde účastníci sa učia a prezentujú svoje výsledky na konci kurzu. Počas neakademickej časti BEST kurzu ukazujeme účastníkom košickú a slovenskú kultúru, pamiatky, historické miesta a tradície.",
-                    UA: "Захід тривалістю 10-14 днів для 20-25 студентів TUKE та студентів технічних університетів з усіх 85 локальних груп BEST з усієї Європи. Він складається з академічної частини, яку ведуть викладачі TUKE або представники компаній-партнерів, зосередженої на конкретній темі (програмування мовою Java, 3D-друк, Інтернет речей…), де учасники навчаються та презентують свої результати наприкінці курсу. Під час неакадемічної частини курсу BEST ми показуємо учасникам Кошице та словацьку культуру, пам'ятки, історичні місця та традиції.",
+                    EN: "10-14 day long event for 20-25 TUKE students and students from technical universities from all 81 Local BEST Groups from all over Europe. It consists of an academic part led by TUKE lecturers or partner company representatives focused on a specific topic (such as programming in Java language, 3D printing, Internet of Things…) where participants learn and present their results at the end of the course. During the non-academic part of a BEST Course, we show participants Kosice and Slovak culture, monuments, historical places, and traditions.",
+                    SK: "10-14 dňové podujatie pre 20-25 študentov TUKE a študentov technických univerzít zo všetkých 81 lokálnych BEST skupín z celej Európy. Skladá sa z akademickej časti vedenej prednášajúcimi TUKE alebo zástupcami partnerských firiem zameranej na konkrétnu tému (programovanie v jazyku Java, 3D tlač, Internet vecí…), kde účastníci sa učia a prezentujú svoje výsledky na konci kurzu. Počas neakademickej časti BEST kurzu ukazujeme účastníkom košickú a slovenskú kultúru, pamiatky, historické miesta a tradície.",
+                    UA: "Захід тривалістю 10-14 днів для 20-25 студентів TUKE та студентів технічних університетів з усіх 81 локальних груп BEST з усієї Європи. Він складається з академічної частини, яку ведуть викладачі TUKE або представники компаній-партнерів, зосередженої на конкретній темі (програмування мовою Java, 3D-друк, Інтернет речей…), де учасники навчаються та презентують свої результати наприкінці курсу. Під час неакадемічної частини курсу BEST ми показуємо учасникам Кошице та словацьку культуру, пам'ятки, історичні місця та традиції.",
                 },
             },
             {
@@ -457,6 +457,62 @@ const translations = {
             EN: "As a student organisation, we organise numerous events focused on developing students. With every event we organise, we strive to fulfill our goal of connecting students, universities, and companies.",
             SK: "Ako študentská organizácia organizujeme množstvo podujatí zameraných na rozvoj študentov. Každým podujatím, ktoré organizujeme, sa snažíme naplniť náš cieľ – spájať študentov, univerzity a firmy.",
             UA: "Як студентська організація, ми проводимо численні заходи, спрямовані на розвиток студентів. Кожним заходом, який ми організовуємо, ми прагнемо досягти нашої мети — об'єднувати студентів, університети та компанії.",
+        },
+        featured: { EN: "Featured", SK: "Odporúčané", UA: "Рекомендоване" },
+        otherEvents: {
+            EN: "Other Events",
+            SK: "Ostatné podujatia",
+            UA: "Інші події",
+        },
+        coursesTitle: {
+            EN: "Explore BEST Courses",
+            SK: "Objavte BEST kurzy",
+            UA: "Відкрийте курси BEST",
+        },
+        coursesDescription: {
+            EN: "BEST organises academic courses across Europe, taught by university professors and industry experts. Discover all available courses and apply!",
+            SK: "BEST organizuje akademické kurzy po celej Európe, vedené univerzitnými profesormi a odborníkmi z praxe. Objavte všetky dostupné kurzy a prihláste sa!",
+            UA: "BEST організовує академічні курси по всій Європі, які ведуть університетські професори та експерти галузі. Дізнайтеся про всі доступні курси та подайте заявку!",
+        },
+        coursesLink: {
+            EN: "Browse all BEST courses",
+            SK: "Prezrieť všetky BEST kurzy",
+            UA: "Переглянути всі курси BEST",
+        },
+        upcomingHeading: {
+            EN: "Upcoming",
+            SK: "Nadchádzajúce",
+            UA: "Майбутні",
+        },
+        upcomingHighlight: {
+            EN: "Events",
+            SK: "Podujatia",
+            UA: "Події",
+        },
+        pastHeading: {
+            EN: "Past",
+            SK: "Minulé",
+            UA: "Минулі",
+        },
+        pastHighlight: {
+            EN: "Events",
+            SK: "Podujatia",
+            UA: "Події",
+        },
+        noUpcoming: {
+            EN: "No upcoming events at the moment",
+            SK: "Momentálne žiadne nadchádzajúce podujatia",
+            UA: "Наразі немає майбутніх подій",
+        },
+        noUpcomingDescription: {
+            EN: "We're preparing something exciting — check back soon!",
+            SK: "Pripravujeme niečo výnimočné — vráťte sa čoskoro!",
+            UA: "Ми готуємо щось захопливе — повертайтеся незабаром!",
+        },
+        noPast: {
+            EN: "No past events yet",
+            SK: "Zatiaľ žiadne minulé podujatia",
+            UA: "Минулих подій поки немає",
         },
         readMore: { EN: "Read more", SK: "Čítať viac", UA: "Читати далі" },
         tags: {
