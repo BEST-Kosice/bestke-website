@@ -1,5 +1,16 @@
 import type { Core } from '@strapi/strapi';
 
+// CORS_ORIGINS env var: comma-separated list of allowed origins.
+// Production (Plesk): CORS_ORIGINS=https://best.tuke.sk
+// Local dev (unset):  defaults to localhost:5173 and localhost:4173
+const getAllowedOrigins = (): string[] => {
+  const raw = process.env.CORS_ORIGINS;
+  if (raw) {
+    return raw.split(',').map((o) => o.trim()).filter(Boolean);
+  }
+  return ['http://localhost:5173', 'http://localhost:4173'];
+};
+
 const config: Core.Config.Middlewares = [
   'strapi::logger',
   'strapi::errors',
@@ -20,7 +31,7 @@ const config: Core.Config.Middlewares = [
   {
     name: 'strapi::cors',
     config: {
-      origin: ['http://localhost:5173', 'http://localhost:4173'],
+      origin: getAllowedOrigins(),
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
       headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
       keepHeaderOnError: true,
