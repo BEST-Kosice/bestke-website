@@ -42,7 +42,7 @@ return (
 
             <div className="grid grid-cols-2 gap-4">
                 <div className="glass rounded-md p-4 text-center">
-                <div className="text-2xl font-black text-best-primary">96</div>
+                <div className="text-2xl font-black text-best-primary">81</div>
                 <div className="text-gray-400 text-sm">{t(translations.about.lbgsInEurope, language)}</div>
                 </div>
                 <div className="glass rounded-md p-4 text-center">
