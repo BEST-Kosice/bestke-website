@@ -91,7 +91,7 @@ export default function EventsPage() {
   return (
     <div className="min-h-screen bg-best-neutral-dark">
       {/* Header */}
-      <section className="pt-16 md:pt-15 pb-12 md:pb-10">
+      <section className="pt-16 md:pt-15 pb-12 md:pb-10 bg-gradient-to-b from-best-primary/10 to-transparent">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF6600]/10 border border-[#FF6600]/20 text-[#FF6600] text-sm font-medium mb-8">
             <BookOpen size={14} />
@@ -141,8 +141,9 @@ export default function EventsPage() {
                     <GraduationCap size={28} className="text-[#FF6600]" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-white font-bold text-xl md:text-2xl mb-2">
+                    <h3 className="flex items-center gap-3 text-white font-bold text-xl md:text-2xl mb-2">
                       {t(translations.eventsPage.coursesTitle, language)}
+                      <img src="BEST-Courses-Logo.png" alt="BEST" className="h-8 md:h-10 w-auto" />
                     </h3>
                     <p className="text-gray-400 leading-relaxed">
                       {t(translations.eventsPage.coursesDescription, language)}

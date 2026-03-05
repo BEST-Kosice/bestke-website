@@ -465,9 +465,9 @@ const translations = {
             UA: "Інші події",
         },
         coursesTitle: {
-            EN: "Explore BEST Courses",
-            SK: "Objavte BEST kurzy",
-            UA: "Відкрийте курси BEST",
+            EN: "Explore ",
+            SK: "Objavte ",
+            UA: "Відкрийте ",
         },
         coursesDescription: {
             EN: "BEST organises academic courses across Europe, taught by university professors and industry experts. Discover all available courses and apply!",
