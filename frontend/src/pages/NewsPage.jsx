@@ -91,7 +91,7 @@ export default function NewsPage() {
   return (
     <div className="min-h-screen bg-best-neutral-dark">
       {/* Header */}
-      <section className="pt-16 md:pt-15 pb-12 md:pb-10">
+      <section className="pt-16 md:pt-15 pb-12 md:pb-10 bg-gradient-to-b from-best-primary/10 to-transparent">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#990032]/10 border border-[#990032]/20 text-[#ff3366] text-sm font-medium mb-8">
             <BookOpen size={14} />

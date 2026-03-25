@@ -36,13 +36,13 @@ const keyContacts = [
     name: 'Roderik Basanda',
     role: { EN: 'President', SK: 'Prezident', UA: 'Президент' },
     email: 'roderik.basanda@best-eu.org',
-    photo: 'https://best.tuke.sk/img/people/board/roderik.webp',
+    photo: '/public/board/roderik.webp',
   },
   {
     name: 'Katarína Gondová',
     role: { EN: 'Secretary', SK: 'Tajomníčka', UA: 'Секретар' },
     email: 'katarina.gondova@best-eu.org',
-    photo: 'https://best.tuke.sk/img/people/board/gadga.webp',
+    photo: '/public/board/gadga.webp',
   },
   {
     name: 'Jozef Belušak',
@@ -52,7 +52,7 @@ const keyContacts = [
       UA: 'VP з фандрейзингу',
     },
     email: 'jozef.belusak@best-eu.org',
-    photo: 'https://best.tuke.sk/img/people/board/jozo.webp',
+    photo: '/public/board/jozo.webp',
   },
 ]
 

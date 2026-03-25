@@ -62,6 +62,11 @@
       "default": false,
       "required": false
     },
+    "completed": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
     "articleType": {
       "type": "enumeration",
       "enum": ["News", "Event"],
