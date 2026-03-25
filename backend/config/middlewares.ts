@@ -43,6 +43,7 @@ const config: Core.Config.Middlewares = [
   'strapi::session',
   'strapi::favicon',
   'strapi::public',
+  'global::spa-fallback',
 ];
 
 export default config;
