@@ -1,0 +1,95 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --color-best-neutral: #1a0a12;
+  --color-best-neutral-light: #2d1020;
+  --color-best-neutral-dark: #0d0509;
+  --color-best-primary: #990032;
+  --color-best-primary-light: #b3003b;
+  --color-best-secondary: #FF6600;
+  --color-best-secondary-light: #ff8533;
+  --color-best-green: #10b981;
+  --color-best-purple: #8b5cf6;
+  --color-best-pink: #ec4899;
+  --color-best-red: #ef4444;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #0d0509;
+  color: #fff;
+}
+
+.font-knewave {
+  font-family: 'Knewave', cursive;
+}
+
+.font-lobster {
+  font-family: 'Lobster', cursive;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0d0509;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #990032;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b3003b;
+}
+
+.animate-fade-in-up {
+  animation: none;
+}
+
+.animate-fade-in {
+  animation: none;
+}
+
+.animate-slide-in-left {
+  animation: none;
+}
+
+.animate-slide-in-right {
+  animation: none;
+}
+
+.animate-float {
+  animation: none;
+}
+
+.animate-pulse-glow {
+  animation: none;
+}
+
+/* Gradient text */
+.gradient-text {
+  color: #FF6600;
+}
+
+/* Glass effect */
+.glass {
+  background: #1a0a12;
+  border: 1px solid #2d1020;
+}
+
+/* Timeline connector */
+.timeline-line {
+  background: #990032;
+}

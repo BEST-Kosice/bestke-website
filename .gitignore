@@ -1,3 +1,14 @@
+# Strapi uploads — folder tracked via .gitkeep, contents excluded
+backend/public/uploads/*
+!backend/public/uploads/.gitkeep
+
+# Strapi TypeScript build output and cache (built on server during deploy)
+backend/dist/
+backend/.tmp/
+
+# Vite production build output (built on server during deploy)
+frontend/dist/
+
 # Logs
 logs
 *.log
@@ -80,7 +91,6 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
 
 # Gatsby files
 .cache/
