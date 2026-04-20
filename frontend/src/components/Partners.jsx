@@ -5,6 +5,7 @@ import translations, { t } from '../i18n/translations'
 const partners = [
   { logo: '/Sponsors/LocalHost - Full.svg', url: 'https://www.localhost.company/' },
   { logo: '/Sponsors/RMKK.svg', url: 'https://rmkk.sk/' },
+  { logo: '/Sponsors/FabClub.png', url: 'https://fabclub.sk/' },
 ]
 
 export default function Partners() {
