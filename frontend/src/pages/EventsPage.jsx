@@ -93,11 +93,6 @@ export default function EventsPage() {
       {/* Header */}
       <section className="pt-16 md:pt-15 pb-12 md:pb-10 bg-gradient-to-b from-best-primary/10 to-transparent">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF6600]/10 border border-[#FF6600]/20 text-[#FF6600] text-sm font-medium mb-8">
-            <BookOpen size={14} />
-            {t(translations.eventsPage.headingMark, language)}
-            <Megaphone size={14} />
-          </div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 tracking-tight">
             {t(translations.eventsPage.heading, language)}{" "}
             <span className="gradient-text">
@@ -143,7 +138,11 @@ export default function EventsPage() {
                   <div className="flex-1 min-w-0">
                     <h3 className="flex items-center gap-3 text-white font-bold text-xl md:text-2xl mb-2">
                       {t(translations.eventsPage.coursesTitle, language)}
-                      <img src="BEST-Courses-Logo.png" alt="BEST" className="h-8 md:h-10 w-auto" />
+                      <img
+                        src="BEST-Courses-Logo.png"
+                        alt="BEST"
+                        className="h-8 md:h-10 w-auto"
+                      />
                     </h3>
                     <p className="text-gray-400 leading-relaxed">
                       {t(translations.eventsPage.coursesDescription, language)}
@@ -177,19 +176,13 @@ export default function EventsPage() {
               {sortedUpcoming.length === 0 ? (
                 <div className="text-center py-16">
                   <div className="w-16 h-16 rounded-full bg-[#FF6600]/10 border border-[#FF6600]/20 flex items-center justify-center mx-auto mb-4">
-                    <CalendarDays
-                      size={28}
-                      className="text-[#FF6600]/60"
-                    />
+                    <CalendarDays size={28} className="text-[#FF6600]/60" />
                   </div>
                   <p className="text-gray-400 text-lg">
                     {t(translations.eventsPage.noUpcoming, language)}
                   </p>
                   <p className="text-gray-500 text-sm mt-2">
-                    {t(
-                      translations.eventsPage.noUpcomingDescription,
-                      language,
-                    )}
+                    {t(translations.eventsPage.noUpcomingDescription, language)}
                   </p>
                 </div>
               ) : (
@@ -216,10 +209,7 @@ export default function EventsPage() {
               <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <SectionHeading
                   heading={t(translations.eventsPage.pastHeading, language)}
-                  highlight={t(
-                    translations.eventsPage.pastHighlight,
-                    language,
-                  )}
+                  highlight={t(translations.eventsPage.pastHighlight, language)}
                   accentColor="#990032"
                 />
 
@@ -251,8 +241,7 @@ function SectionHeading({ heading, highlight, accentColor }) {
   return (
     <div className="text-center mb-12">
       <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-        {heading}{" "}
-        <span style={{ color: accentColor }}>{highlight}</span>
+        {heading} <span style={{ color: accentColor }}>{highlight}</span>
       </h2>
       <div
         className="w-24 h-1 mx-auto rounded-full mb-6"
@@ -329,7 +318,9 @@ function CmsAlternatingCard({ article, language, index, isPast }) {
             className={`${isLeft ? "lg:pr-12" : "lg:pl-12"}`}
             style={!isLeft ? { direction: "ltr" } : {}}
           >
-            <div className={`relative rounded-xl overflow-hidden border border-white/[0.06] group-hover:border-white/10 transition-colors duration-300 ${isPast ? "opacity-75" : ""}`}>
+            <div
+              className={`relative rounded-xl overflow-hidden border border-white/[0.06] group-hover:border-white/10 transition-colors duration-300 ${isPast ? "opacity-75" : ""}`}
+            >
               {coverUrl ? (
                 <img
                   src={coverUrl}

@@ -6,58 +6,36 @@ import {
   Linkedin,
   Mail,
   MapPin,
-} from 'lucide-react'
-import { useLanguage } from '../context/LanguageContext'
-import translations, { t } from '../i18n/translations'
+} from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
+import translations, { t } from "../i18n/translations";
+import { boardMembers } from "../consts/consts";
 
 const socialLinks = [
   {
-    name: 'Facebook',
+    name: "Facebook",
     icon: <Facebook size={24} />,
-    url: 'https://www.facebook.com/BESTKosice?locale=sk_SK',
-    color: 'hover:bg-blue-600/20 hover:text-blue-400',
+    url: "https://www.facebook.com/BESTKosice?locale=sk_SK",
+    color: "hover:bg-blue-600/20 hover:text-blue-400",
   },
   {
-    name: 'Instagram',
+    name: "Instagram",
     icon: <Instagram size={24} />,
-    url: 'https://www.instagram.com/bestkosice/',
-    color: 'hover:bg-pink-600/20 hover:text-pink-400',
+    url: "https://www.instagram.com/bestkosice/",
+    color: "hover:bg-pink-600/20 hover:text-pink-400",
   },
   {
-    name: 'LinkedIn',
+    name: "LinkedIn",
     icon: <Linkedin size={24} />,
-    url: 'https://www.linkedin.com/company/best-kosice/posts/?feedView=all',
-    color: 'hover:bg-sky-600/20 hover:text-sky-400',
+    url: "https://www.linkedin.com/company/best-kosice/posts/?feedView=all",
+    color: "hover:bg-sky-600/20 hover:text-sky-400",
   },
-]
+];
 
-const keyContacts = [
-  {
-    name: 'Roderik Basanda',
-    role: { EN: 'President', SK: 'Prezident', UA: 'Президент' },
-    email: 'roderik.basanda@best-eu.org',
-    photo: '/board/roderik.webp',
-  },
-  {
-    name: 'Katarína Gondová',
-    role: { EN: 'Secretary', SK: 'Tajomníčka', UA: 'Секретар' },
-    email: 'katarina.gondova@best-eu.org',
-    photo: '/board/gadga.webp',
-  },
-  {
-    name: 'Jozef Belušak',
-    role: {
-      EN: 'VP for Fundraising',
-      SK: 'VP pre Fundraising',
-      UA: 'VP з фандрейзингу',
-    },
-    email: 'jozef.belusak@best-eu.org',
-    photo: '/board/jozo.webp',
-  },
-]
+const keyContacts = [boardMembers[0], boardMembers[1], boardMembers[3]];
 
 export default function ContactPage() {
-  const { language } = useLanguage()
+  const { language } = useLanguage();
 
   return (
     <>
@@ -66,7 +44,7 @@ export default function ContactPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-best-primary/10 to-transparent" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6">
-            {t(translations.contactPage.heroTitle, language)}{' '}
+            {t(translations.contactPage.heroTitle, language)}{" "}
             <span className="gradient-text">
               {t(translations.contactPage.heroHighlight, language)}
             </span>
@@ -84,7 +62,7 @@ export default function ContactPage() {
             {/* Left — Contact Info */}
             <div>
               <h2 className="text-3xl md:text-4xl font-black text-white mb-8">
-                {t(translations.contactPage.infoHeading, language)}{' '}
+                {t(translations.contactPage.infoHeading, language)}{" "}
                 <span className="gradient-text">
                   {t(translations.contactPage.infoHighlight, language)}
                 </span>
@@ -143,7 +121,7 @@ export default function ContactPage() {
               {/* Social Links */}
               <div className="mt-10">
                 <h3 className="text-2xl font-bold text-white mb-2">
-                  {t(translations.contactPage.socialHeading, language)}{' '}
+                  {t(translations.contactPage.socialHeading, language)}{" "}
                   <span className="gradient-text">
                     {t(translations.contactPage.socialHighlight, language)}
                   </span>
@@ -172,7 +150,7 @@ export default function ContactPage() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-best-secondary hover:text-best-secondary-light transition-colors text-sm font-medium"
                   >
-                    {t(translations.contactPage.bestEuOrg, language)}{' '}
+                    {t(translations.contactPage.bestEuOrg, language)}{" "}
                     <ExternalLink size={14} />
                   </a>
                 </div>
@@ -182,7 +160,7 @@ export default function ContactPage() {
             {/* Right — Key Contacts (Board Members) */}
             <div>
               <h2 className="text-3xl md:text-4xl font-black text-white mb-2">
-                {t(translations.contactPage.keyContactsHeading, language)}{' '}
+                {t(translations.contactPage.keyContactsHeading, language)}{" "}
                 <span className="gradient-text">
                   {t(translations.contactPage.keyContactsHighlight, language)}
                 </span>
@@ -203,7 +181,9 @@ export default function ContactPage() {
                       className="w-20 h-20 rounded-full object-cover border-2 border-best-primary/40 shrink-0"
                     />
                     <div className="min-w-0">
-                      <h3 className="text-white font-bold text-lg">{member.name}</h3>
+                      <h3 className="text-white font-bold text-lg">
+                        {member.name}
+                      </h3>
                       <p className="text-best-secondary text-sm font-medium mb-2">
                         {t(member.role, language)}
                       </p>
@@ -228,7 +208,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-              {t(translations.contactPage.mapHeading, language)}{' '}
+              {t(translations.contactPage.mapHeading, language)}{" "}
               <span className="gradient-text">
                 {t(translations.contactPage.mapHighlight, language)}
               </span>
@@ -239,7 +219,7 @@ export default function ContactPage() {
           <div className="glass rounded-md overflow-hidden">
             <iframe
               title="BEST Košice Location"
-              src="https://maps.google.com/maps?q=48.73048,21.24505&z=17&output=embed"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5609.976449942151!2d21.230403925702603!3d48.72967785106638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473ee10005595165%3A0x3466511ed105dd1b!2sBEST%20Ko%C5%A1ice!5e0!3m2!1suk!2ssk!4v1789859550641!5m2!1suk!2ssk"
               width="100%"
               height="400"
               style={{ border: 0 }}
@@ -252,5 +232,5 @@ export default function ContactPage() {
         </div>
       </section>
     </>
-  )
+  );
 }

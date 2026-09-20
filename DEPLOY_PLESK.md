@@ -2,12 +2,14 @@
 
 > Монорепозиторий: `/frontend` (Vite/React) + `/backend` (Strapi 5).  
 > Один и тот же GitHub-репозиторий подключается в Plesk **дважды**:
+>
 > - `best.tuke.sk` → статический фронтенд
 > - `api.best.tuke.sk` → Node.js приложение Strapi
 
 ---
 
 ## Содержание
+
 1. [Предварительные требования](#1-предварительные-требования)
 2. [Настройка базы данных PostgreSQL в Plesk](#2-настройка-postgresql-в-plesk)
 3. [Деплой фронтенда — best.tuke.sk](#3-деплой-фронтенда--besttukessk)
@@ -23,13 +25,13 @@
 
 ## 1. Предварительные требования
 
-| Что | Где проверить |
-|-----|--------------|
-| Домен `best.tuke.sk` привязан к хостингу | Plesk → Websites & Domains |
-| Поддомен `api.best.tuke.sk` создан | Plesk → Websites & Domains → Add Subdomain |
-| SSL-сертификаты на обоих доменах | Plesk → SSL/TLS Certificates → Let's Encrypt |
-| Node.js Extension установлен в Plesk | Plesk → Extensions → Node.js |
-| PostgreSQL Extension установлен | Plesk → Extensions → PostgreSQL |
+| Что                                      | Где проверить                                |
+| ---------------------------------------- | -------------------------------------------- |
+| Домен `best.tuke.sk` привязан к хостингу | Plesk → Websites & Domains                   |
+| Поддомен `api.best.tuke.sk` создан       | Plesk → Websites & Domains → Add Subdomain   |
+| SSL-сертификаты на обоих доменах         | Plesk → SSL/TLS Certificates → Let's Encrypt |
+| Node.js Extension установлен в Plesk     | Plesk → Extensions → Node.js                 |
+| PostgreSQL Extension установлен          | Plesk → Extensions → PostgreSQL              |
 
 ---
 
@@ -60,7 +62,7 @@
    - **Remote URL**: `https://github.com/<your-org>/bestke-website.git`
    - **Branch**: `main`
    - **Repository path** (куда клонировать): `/var/www/vhosts/best.tuke.sk/repo`  
-     *(путь вне `httpdocs` — это staging-директория)*
+     _(путь вне `httpdocs` — это staging-директория)_
    - ✅ **Enable deployment** — включи
 4. **Deploy actions** — вставь точно это:
 
@@ -68,12 +70,22 @@
 cd frontend
 npm ci
 VITE_STRAPI_URL=https://api.best.tuke.sk npm run build
-rm -rf /var/www/vhosts/best.tuke.sk/httpdocs/*
-cp -r dist/. /var/www/vhosts/best.tuke.sk/httpdocs/
 ```
 
+Для Node.js-приложения Plesk не нужно копировать `dist` в `httpdocs`: Express
+отдаёт эту папку напрямую. Установи настройки Node.js так:
+
+| Поле                         | Значение                                     |
+| ---------------------------- | -------------------------------------------- |
+| **Application root**         | `/var/www/vhosts/best.tuke.sk/repo/frontend` |
+| **Application startup file** | `server.cjs`                                 |
+| **Application mode**         | `production`                                 |
+
+Не используй `app.js`, если этот файл не создан в `frontend/`. В репозитории
+готовый startup-файл называется `server.cjs`.
+
 5. **Webhook**: нажми **Copy webhook URL** и добавь в GitHub:  
-   GitHub репозиторий → **Settings → Webhooks → Add webhook**  
+   GitHub репозиторий → **Settings → Webhooks → Add webhook**
    - Payload URL: вставь скопированный URL
    - Content type: `application/json`
    - Event: **Just the push event**
@@ -114,7 +126,7 @@ npm ci --omit=dev
 npm run build
 ```
 
-> ⚠ **НЕ добавляй `rm -rf` в deploy actions** — это может удалить `public/uploads/`. После pull git не трогает файлы, которых нет в репозитории, так что uploads сохраняются автоматически.
+> ⚠ **НЕ добавляй `rm -rf backend/public` или `rm -rf backend/public/uploads` в deploy actions** — это удалит загруженные файлы. После pull git не трогает файлы, которых нет в репозитории, так что uploads сохраняются автоматически.
 
 ### 4.2 Node.js Application
 
@@ -122,14 +134,14 @@ npm run build
 2. Нажми **Enable Node.js**
 3. Заполни:
 
-| Поле | Значение |
-|------|----------|
-| **Node.js version** | `21.7.3` (или выбери актуальную LTS ≥ 20) |
-| **Package manager** | `npm` |
-| **Application mode** | `production` |
-| **Application root** | `/var/www/vhosts/api.best.tuke.sk/repo/backend` |
-| **Application startup file** | `app.js` |
-| **Document root** | `/var/www/vhosts/api.best.tuke.sk/httpdocs` *(оставь по умолчанию)* |
+| Поле                         | Значение                                                            |
+| ---------------------------- | ------------------------------------------------------------------- |
+| **Node.js version**          | `21.7.3` (или выбери актуальную LTS ≥ 20)                           |
+| **Package manager**          | `npm`                                                               |
+| **Application mode**         | `production`                                                        |
+| **Application root**         | `/var/www/vhosts/api.best.tuke.sk/repo/backend`                     |
+| **Application startup file** | `app.js`                                                            |
+| **Document root**            | `/var/www/vhosts/api.best.tuke.sk/httpdocs` _(оставь по умолчанию)_ |
 
 4. Нажми **Apply** / **Enable**.
 
@@ -137,26 +149,26 @@ npm run build
 
 В том же разделе **Node.js** → кнопка **Environment Variables** (или **Edit** рядом с env section). Добавь каждую‑по‑одной:
 
-| Переменная | Значение |
-|-----------|---------|
-| `NODE_ENV` | `production` |
-| `HOST` | `0.0.0.0` |
-| `PORT` | *(оставь пустым — Plesk подставит сам)* |
-| `STRAPI_URL` | `https://api.best.tuke.sk` |
-| `IS_BEHIND_PROXY` | `true` |
-| `CORS_ORIGINS` | `https://best.tuke.sk` |
-| `APP_KEYS` | `key1,key2,key3,key4` — см. [раздел 5](#5-переменные-окружения-бэкенда) |
-| `API_TOKEN_SALT` | *сгенерированное значение* |
-| `ADMIN_JWT_SECRET` | *сгенерированное значение* |
-| `TRANSFER_TOKEN_SALT` | *сгенерированное значение* |
-| `ENCRYPTION_KEY` | *сгенерированное значение* |
-| `DATABASE_CLIENT` | `postgres` |
-| `DATABASE_HOST` | `localhost` *(из шага 2)* |
-| `DATABASE_PORT` | `5432` |
-| `DATABASE_NAME` | *из шага 2* |
-| `DATABASE_USERNAME` | *из шага 2* |
-| `DATABASE_PASSWORD` | *из шага 2* |
-| `DATABASE_SSL` | `false` *(если Plesk Postgres без SSL)* |
+| Переменная            | Значение                                                                |
+| --------------------- | ----------------------------------------------------------------------- |
+| `NODE_ENV`            | `production`                                                            |
+| `HOST`                | `0.0.0.0`                                                               |
+| `PORT`                | _(оставь пустым — Plesk подставит сам)_                                 |
+| `STRAPI_URL`          | `https://api.best.tuke.sk`                                              |
+| `IS_BEHIND_PROXY`     | `true`                                                                  |
+| `CORS_ORIGINS`        | `https://best.tuke.sk`                                                  |
+| `APP_KEYS`            | `key1,key2,key3,key4` — см. [раздел 5](#5-переменные-окружения-бэкенда) |
+| `API_TOKEN_SALT`      | _сгенерированное значение_                                              |
+| `ADMIN_JWT_SECRET`    | _сгенерированное значение_                                              |
+| `TRANSFER_TOKEN_SALT` | _сгенерированное значение_                                              |
+| `ENCRYPTION_KEY`      | _сгенерированное значение_                                              |
+| `DATABASE_CLIENT`     | `postgres`                                                              |
+| `DATABASE_HOST`       | `localhost` _(из шага 2)_                                               |
+| `DATABASE_PORT`       | `5432`                                                                  |
+| `DATABASE_NAME`       | _из шага 2_                                                             |
+| `DATABASE_USERNAME`   | _из шага 2_                                                             |
+| `DATABASE_PASSWORD`   | _из шага 2_                                                             |
+| `DATABASE_SSL`        | `false` _(если Plesk Postgres без SSL)_                                 |
 
 ### 4.4 Первый запуск
 
@@ -210,6 +222,7 @@ console.log('ENCRYPTION_KEY=' + c.randomBytes(16).toString('base64'));
 Если папка `uploads/` не существует на сервере, Strapi упадёт при загрузке файла. Создай её один раз через SSH или файловый менеджер Plesk:
 
 **Plesk File Manager**:
+
 1. Plesk → **api.best.tuke.sk** → **Files**
 2. Перейди в `repo/backend/public/`
 3. Нажми **New directory** → `uploads`
@@ -271,15 +284,15 @@ location /api {
 
 ## 9. Проверка работоспособности
 
-| Что проверяем | Ожидаемый результат |
-|--------------|---------------------|
-| `https://best.tuke.sk` | Открывается главная страница сайта |
-| `https://best.tuke.sk/news` | Открывается страница новостей (SPA роутинг) |
-| `https://best.tuke.sk/admin` | Редирект на `https://api.best.tuke.sk/admin` |
+| Что проверяем                           | Ожидаемый результат                             |
+| --------------------------------------- | ----------------------------------------------- |
+| `https://best.tuke.sk`                  | Открывается главная страница сайта              |
+| `https://best.tuke.sk/news`             | Открывается страница новостей (SPA роутинг)     |
+| `https://best.tuke.sk/admin`            | Редирект на `https://api.best.tuke.sk/admin`    |
 | `https://api.best.tuke.sk/api/articles` | JSON-ответ от Strapi (может быть пустой массив) |
-| `https://api.best.tuke.sk/admin` | Страница входа в Strapi Admin |
-| Загрузка медиафайла в Strapi Admin | Файл сохраняется, URL работает |
-| Push в GitHub → 2-3 мин → F5 на сайте | Изменения применились |
+| `https://api.best.tuke.sk/admin`        | Страница входа в Strapi Admin                   |
+| Загрузка медиафайла в Strapi Admin      | Файл сохраняется, URL работает                  |
+| Push в GitHub → 2-3 мин → F5 на сайте   | Изменения применились                           |
 
 ---
 
@@ -310,5 +323,9 @@ location /api {
 
 ### `dist/` не найден при запуске
 
-- Deploy actions должны включать `npm run build` в папке `backend/`
-- `NODE_ENV=production` должен быть установлен в env-переменных
+- Для фронтенда deploy actions должны включать `cd frontend`, `npm ci` и
+  `VITE_STRAPI_URL=https://api.best.tuke.sk npm run build`.
+- Для фронтенда **Application root** должен указывать на `repo/frontend`, а
+  **Application startup file** должен быть `server.cjs`.
+- Для Strapi `dist/` создаётся отдельной командой `cd backend && npm run build`.
+- `NODE_ENV=production` должен быть установлен в env-переменных Strapi.

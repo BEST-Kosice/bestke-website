@@ -93,11 +93,6 @@ export default function NewsPage() {
       {/* Header */}
       <section className="pt-16 md:pt-15 pb-12 md:pb-10 bg-gradient-to-b from-best-primary/10 to-transparent">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#990032]/10 border border-[#990032]/20 text-[#ff3366] text-sm font-medium mb-8">
-            <BookOpen size={14} />
-            {t(translations.newsPage.headingMark, language)}
-            <Megaphone size={14} />
-          </div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 tracking-tight">
             {t(translations.newsPage.heading, language)}{" "}
             <span className="gradient-text">
