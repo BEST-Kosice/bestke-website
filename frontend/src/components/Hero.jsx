@@ -30,7 +30,11 @@ export default function Hero() {
             className={`absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out ${
               index === currentImage ? "opacity-100" : "opacity-0"
             }`}
-            style={{ backgroundImage: `url(${image})` }}
+            style={
+              index === currentImage
+                ? { backgroundImage: `url(${image})` }
+                : undefined
+            }
           />
         ))}
         <div className="absolute inset-0 bg-best-neutral-dark/70" />

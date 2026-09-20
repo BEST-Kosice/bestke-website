@@ -1,23 +1,32 @@
-import { Link } from 'react-router-dom'
-import { useLanguage } from '../context/LanguageContext'
-import translations, { t } from '../i18n/translations'
+import { Link } from "react-router-dom";
+import { useLanguage } from "../context/LanguageContext";
+import translations, { t } from "../i18n/translations";
 
 const partners = [
-  { logo: '/Sponsors/LocalHost - Full.svg', url: 'https://www.localhost.company/' },
-  { logo: '/Sponsors/RMKK.svg', url: 'https://rmkk.sk/' },
-  { logo: '/Sponsors/FabClub.png', url: 'https://fabclub.sk/' },
-]
+  {
+    logo: "/Sponsors/LocalHost - Full.svg",
+    url: "https://www.localhost.company/",
+  },
+  { logo: "/Sponsors/RMKK.svg", url: "https://rmkk.sk/" },
+  { logo: "/Sponsors/FabClub.webp", url: "https://fabclub.sk/" },
+];
 
 export default function Partners() {
-  const { language } = useLanguage()
+  const { language } = useLanguage();
 
   return (
-    <section id="partners" className="py-20 md:py-24 bg-best-neutral-dark border-t border-white/10">
+    <section
+      id="partners"
+      className="py-20 md:py-24 bg-best-neutral-dark border-t border-white/10"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
-            {t(translations.partners.heading, language)} <span className="gradient-text">{t(translations.partners.headingHighlight, language)}</span>
+            {t(translations.partners.heading, language)}{" "}
+            <span className="gradient-text">
+              {t(translations.partners.headingHighlight, language)}
+            </span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-best-primary to-best-secondary mx-auto rounded-full mb-6" />
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -39,6 +48,8 @@ export default function Partners() {
                 src={partner.logo}
                 alt="Partner"
                 className="h-16 md:h-20 w-auto object-contain"
+                loading="lazy"
+                decoding="async"
               />
             </a>
           ))}
@@ -47,7 +58,9 @@ export default function Partners() {
         {/* CTA */}
         <div className="text-center mt-16">
           <div className="glass rounded-md p-8 md:p-12 max-w-2xl mx-auto">
-            <h3 className="text-white font-bold text-2xl mb-3">{t(translations.partners.ctaTitle, language)}</h3>
+            <h3 className="text-white font-bold text-2xl mb-3">
+              {t(translations.partners.ctaTitle, language)}
+            </h3>
             <p className="text-gray-400 mb-6">
               {t(translations.partners.ctaDescription, language)}
             </p>
@@ -61,5 +74,5 @@ export default function Partners() {
         </div>
       </div>
     </section>
-  )
+  );
 }
