@@ -147,11 +147,11 @@ export default function ArticlePage() {
 
         {/* Cover image */}
         {coverUrl && (
-          <div className="mb-10 rounded-lg overflow-hidden">
+          <div className="mb-10 rounded-lg overflow-hidden bg-best-neutral">
             <img
               src={coverUrl}
               alt={article.title}
-              className="w-full h-auto max-h-[500px] object-cover"
+              className="w-full h-auto max-h-[80vh] object-contain object-center md:w-auto md:max-w-full md:mx-auto"
             />
           </div>
         )}
