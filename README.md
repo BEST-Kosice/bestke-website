@@ -97,20 +97,3 @@ You can also run the frontend and backend directly on your machine.
    The frontend will be available at [http://localhost:5173](http://localhost:5173).
 
 You can also run just one side (e.g. only `dev:frontend`) if you only need to work on that part and point it at an already-running backend.
-
-## Deployment (Plesk)
-
-The site is hosted on Plesk and deploys straight from the `main` branch of this repository — there is no separate build/release pipeline.
-
-- **`best.tuke.sk`** and **`api.best.tuke.sk`** are each connected to this same GitHub repo as an independent Git Deployment in Plesk (one for the frontend, one for the backend).
-- A GitHub webhook notifies Plesk on every push to `main`. Plesk then runs `git pull` in each site's repo directory followed by its configured deploy actions:
-  - **Frontend**: `npm ci` → `vite build` → copy `dist/` into the site's `httpdocs/`.
-  - **Backend**: `npm ci --omit=dev` → `strapi build`. The Node.js app must be **restarted manually** in Plesk after each backend deploy — Plesk does not do this automatically.
-- Uploaded media (`backend/public/uploads/`) is excluded from git and is never touched by `git pull`, so it survives every deploy.
-- `best.tuke.sk/admin` redirects to `api.best.tuke.sk/admin`, where the actual Strapi admin panel is served.
-
-Full step-by-step setup instructions (database, environment variables, Nginx rules, troubleshooting) are documented in [`DEPLOY_PLESK.md`](./DEPLOY_PLESK.md).
-
-## Environment Variables
-
-The backend requires a `.env` file for Strapi secrets and database connection details. See [`DEPLOY_PLESK.md`](./DEPLOY_PLESK.md) (section 5) for the full list of required variables and how to generate secrets. For local Docker development, the required variables are already set in `docker-compose.yml`.
