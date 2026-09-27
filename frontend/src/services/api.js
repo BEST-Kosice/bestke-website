@@ -1,4 +1,6 @@
-const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || "http://localhost:1337";
+const STRAPI_URL =
+  import.meta.env.VITE_STRAPI_URL ||
+  (import.meta.env.DEV ? "http://localhost:1337" : "https://api.best.tuke.sk");
 
 /**
  * Fetch all published articles from Strapi, sorted by publishDate descending.
