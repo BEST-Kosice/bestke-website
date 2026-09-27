@@ -14,6 +14,11 @@ export default function Hero() {
   const { language } = useLanguage();
 
   useEffect(() => {
+    images.forEach((image) => {
+      const preloadImage = new Image();
+      preloadImage.src = image;
+    });
+
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % images.length);
     }, 5000);
@@ -27,14 +32,14 @@ export default function Hero() {
         {images.map((image, index) => (
           <div
             key={image}
-            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out ${
+            aria-hidden={index !== currentImage}
+            className={`absolute inset-0 bg-cover bg-center transform-gpu transition-[opacity,transform] duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
               index === currentImage ? "opacity-100" : "opacity-0"
             }`}
-            style={
-              index === currentImage
-                ? { backgroundImage: `url(${image})` }
-                : undefined
-            }
+            style={{
+              backgroundImage: `url(${image})`,
+              transform: index === currentImage ? "scale(1)" : "scale(1.04)",
+            }}
           />
         ))}
         <div className="absolute inset-0 bg-best-neutral-dark/70" />
