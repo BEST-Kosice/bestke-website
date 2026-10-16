@@ -97,3 +97,13 @@ You can also run the frontend and backend directly on your machine.
    The frontend will be available at [http://localhost:5173](http://localhost:5173).
 
 You can also run just one side (e.g. only `dev:frontend`) if you only need to work on that part and point it at an already-running backend.
+
+## Running tests
+
+```
+cd frontend
+npm run test # run all tests once
+npm run test:watch # re-run on file changes
+```
+
+Tests use Vitest, React Testing Library and jsdom. Put test files next to the code they test, named `Something.test.jsx`. Query by role or visible text (`screen.getByRole`, `getByText`), not by CSS class or implementation details. Wrap components that use routing in `MemoryRouter`.
