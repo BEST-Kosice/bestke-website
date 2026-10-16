@@ -1,63 +1,65 @@
-import { Facebook, Instagram, Linkedin, Menu, X } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { useLanguage } from '../context/LanguageContext'
-import translations, { t } from '../i18n/translations'
+import { Facebook, Instagram, Linkedin, Menu, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useLanguage } from "../context/LanguageContext";
+import translations, { t } from "../i18n/translations";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
-  const { language, toggleLanguage } = useLanguage()
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileHidden, setMobileHidden] = useState(false)
-  const location = useLocation()
-  const lastScrollY = useRef(0)
+  const [isOpen, setIsOpen] = useState(false);
+  const { language, toggleLanguage } = useLanguage();
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileHidden, setMobileHidden] = useState(false);
+  const location = useLocation();
+  const lastScrollY = useRef(0);
 
   const navRouteLinks = [
-    { name: t(translations.nav.events, language), to: '/events' },
-    { name: t(translations.nav.news, language), to: '/news' },
-    { name: t(translations.nav.aboutUs, language), to: '/about' },
-    { name: t(translations.nav.contacts, language), to: '/contact' },
-  ]
+    { name: t(translations.nav.events, language), to: "/events" },
+    { name: t(translations.nav.news, language), to: "/news" },
+    { name: t(translations.nav.aboutUs, language), to: "/about" },
+    { name: t(translations.nav.contacts, language), to: "/contact" },
+  ];
 
-  const navAnchorLinks = [
-  ]
+  const navAnchorLinks = [];
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      const isMobile = window.innerWidth < 768
+      const currentScrollY = window.scrollY;
+      const isMobile = window.innerWidth < 768;
 
-      setScrolled(currentScrollY > 20)
+      setScrolled(currentScrollY > 20);
 
       if (isMobile) {
         if (currentScrollY < 20) {
-          setMobileHidden(false)
-        } else if (currentScrollY > lastScrollY.current + 8 && currentScrollY > 80) {
-          setMobileHidden(true)
+          setMobileHidden(false);
+        } else if (
+          currentScrollY > lastScrollY.current + 8 &&
+          currentScrollY > 80
+        ) {
+          setMobileHidden(true);
         } else if (currentScrollY < lastScrollY.current - 8) {
-          setMobileHidden(false)
+          setMobileHidden(false);
         }
       } else {
-        setMobileHidden(false)
+        setMobileHidden(false);
       }
 
-      lastScrollY.current = currentScrollY
-    }
+      lastScrollY.current = currentScrollY;
+    };
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 bg-[#990032] shadow-lg transition-transform duration-300 ${
-        mobileHidden ? '-translate-y-full md:translate-y-0' : 'translate-y-0'
+        mobileHidden ? "-translate-y-full md:translate-y-0" : "translate-y-0"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           className={`flex items-center justify-between transition-all duration-300 ${
-            scrolled ? 'h-16 lg:h-20' : 'h-16 md:h-20 lg:h-24'
+            scrolled ? "h-16 lg:h-20" : "h-16 md:h-20 lg:h-24"
           }`}
         >
           {/* Logo — links home */}
@@ -65,8 +67,8 @@ export default function Navbar() {
             to="/"
             className="flex items-center gap-3 shrink-0 group"
             onClick={() => {
-              if (location.pathname === '/') {
-                window.scrollTo({ top: 0, behavior: 'smooth' })
+              if (location.pathname === "/") {
+                window.scrollTo({ top: 0, behavior: "smooth" });
               }
             }}
           >
@@ -74,7 +76,7 @@ export default function Navbar() {
               src="/BESTKEWhite.png"
               alt="BEST Košice"
               className={`w-auto group-hover:scale-105 transition-all duration-300 ${
-                scrolled ? 'h-10 md:h-12 lg:h-14' : 'h-11 md:h-14 lg:h-16'
+                scrolled ? "h-10 md:h-12 lg:h-14" : "h-11 md:h-14 lg:h-16"
               }`}
             />
           </Link>
@@ -87,8 +89,8 @@ export default function Navbar() {
                 to={link.to}
                 className={`text-sm font-semibold uppercase tracking-wider transition-colors duration-200 ${
                   location.pathname === link.to
-                    ? 'text-white border-b-2 border-white pb-0.5'
-                    : 'text-white/80 hover:text-white'
+                    ? "text-white border-b-2 border-white pb-0.5"
+                    : "text-white/80 hover:text-white"
                 }`}
               >
                 {link.name}
@@ -147,8 +149,12 @@ export default function Navbar() {
 
           {/* Mobile toggle */}
           <button
+            type="button"
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden text-white p-2"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -157,8 +163,9 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
+        id="mobile-menu"
         className={`md:hidden transition-all duration-300 overflow-hidden ${
-          isOpen ? 'max-h-[420px] opacity-100' : 'max-h-0 opacity-0'
+          isOpen ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="bg-[#990032] border-t border-white/10 px-4 py-4 space-y-3">
@@ -169,8 +176,8 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
               className={`block py-2 text-sm font-semibold uppercase tracking-wider transition-colors ${
                 location.pathname === link.to
-                  ? 'text-white'
-                  : 'text-white/70 hover:text-white'
+                  ? "text-white"
+                  : "text-white/70 hover:text-white"
               }`}
             >
               {link.name}
@@ -228,5 +235,5 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
-  )
+  );
 }
