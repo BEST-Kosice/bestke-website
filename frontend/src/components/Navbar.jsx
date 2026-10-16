@@ -167,6 +167,7 @@ export default function Navbar() {
         className={`md:hidden transition-all duration-300 overflow-hidden ${
           isOpen ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"
         }`}
+        inert={!isOpen}
       >
         <div className="bg-[#990032] border-t border-white/10 px-4 py-4 space-y-3">
           {navRouteLinks.map((link) => (
