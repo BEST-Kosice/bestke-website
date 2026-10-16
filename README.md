@@ -36,7 +36,7 @@ The project runs fully containerized for local development — no local Node/Pos
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/kitnew/bestke-website.git
+   git clone https://github.com/BEST-Kosice/bestke-website.git
    cd bestke-website
    ```
 
@@ -71,7 +71,7 @@ You can also run the frontend and backend directly on your machine.
 1. Clone the repository and install dependencies for both workspaces:
 
    ```bash
-   git clone https://github.com/kitnew/bestke-website.git
+   git clone https://github.com/BEST-Kosice/bestke-website.git
    cd bestke-website
    npm run install:all
    ```
